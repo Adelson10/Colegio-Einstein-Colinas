@@ -295,14 +295,14 @@ function Hero() {
                 animate={{ opacity: 1, y: -40 }}
                 transition={{ duration: 0.7, delay: 0.1 }}
               >
-                <h1 className="font-display font-900 leading-[1.05] tracking-tight via-70% text-5xl sm:text-5xl lg:text-7xl bg-gradient-to-b from-sky-400 via-primary to-primary/80 bg-clip-text text-transparent">
+                <h1 className="font-display font-900 leading-[1.05] tracking-tight via-70% text-4xl sm:text-5xl md:text-6xl lg:text-7xl bg-gradient-to-b from-sky-400 via-primary to-primary/80 bg-clip-text text-transparent">
                   Formar mentes
                 </h1>
                 <span>
-                  <h1 className="inline font-display font-900 leading-[1.05] via-70% tracking-tight text-5xl sm:text-5xl lg:text-7xl bg-gradient-to-b from-sky-400 via-primary to-primary/80 bg-clip-text text-transparent">
+                  <h1 className="inline font-display font-900 leading-[1.05] via-70% tracking-tight text-4xl sm:text-5xl md:text-6xl lg:text-7xl bg-gradient-to-b from-sky-400 via-primary to-primary/80 bg-clip-text text-transparent">
                     para o
                   </h1>
-                  <h1 className="inline font-display font-900 leading-[1.05] tracking-tight text-5xl sm:text-5xl lg:text-7xl text-accent">
+                  <h1 className="inline font-display font-900 leading-[1.05] tracking-tight text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-accent">
                     {'  '}futuro.
                   </h1>
                 </span>
@@ -312,7 +312,7 @@ function Hero() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.25 }}
-                className="text-muted-foreground max-w-lg mx-auto lg:ml-0 lg:mr-32 text-justify text-lg"
+                className="text-muted-foreground max-w-lg mx-auto lg:ml-0 lg:mr-32 text-justify text-base sm:text-lg"
               >
                 Há mais de três décadas, o Colégio Albert Einstein constrói trajetórias de aprendizado com dedicação,
                 valores e resultados que se destacam entre as melhores escolas da região.
@@ -405,7 +405,7 @@ function Marquee() {
                   key={i}
                   aria-hidden="true"
                   src={`/row/${src}`}
-                  className="mx-8 inline-block h-8 lg:h-16 shrink-0 object-contain"
+                  className="mx-8 inline-block h-7 sm:h-10 md:h-12 lg:h-16 shrink-0 object-contain"
                   style={{ aspectRatio: ratio }}
                 />)}
             </div>
@@ -425,7 +425,7 @@ function Historia() {
                 </Reveal>
                 <Reveal delay={0.1}>
                     <span className="text-sm font-600 uppercase tracking-[0.2em] text-accent">Nossa história</span>
-                    <h2 className="mt-3 font-display font-900 text-3xl lg:text-5xl text-primary leading-tight">
+                    <h2 className="mt-3 font-display font-900 text-3xl md:text-4xl lg:text-5xl text-primary leading-tight">
                         Uma trajetória construída com propósito
                     </h2>
                     <p className="mt-5 text-muted-foreground leading-relaxed text-justify ">
@@ -478,13 +478,13 @@ function MissaoVisaoValores() {
   ];
 
   return (
-    <section id="missao" className="relative overflow-hidden bg-primary text-primary-foreground h-screen flex flex-col pt-20 sm:pt-24 pb-4 sm:pb-6 lg:pb-8">
+    <section id="missao" className="relative overflow-hidden bg-primary text-primary-foreground min-h-[100dvh] flex flex-col pt-20 sm:pt-24 pb-4 sm:pb-6 lg:pb-8">
       <div className="pointer-events-none absolute -top-32 -right-24 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
       <div className="relative flex-1 min-h-0 flex flex-col justify-center mx-auto max-w-[90rem] w-full px-5 lg:px-10">
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 sm:gap-6 lg:gap-8">
           <Reveal className="max-w-xl">
             <span className="text-xs sm:text-sm font-600 uppercase tracking-[0.2em] text-accent">Nossos pilares</span>
-            <h2 className="mt-1.5 sm:mt-3 font-display font-900 text-xl sm:text-3xl lg:text-5xl leading-tight">
+            <h2 className="mt-1.5 sm:mt-3 font-display font-900 text-xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight">
               O que nos guia todos os dias
             </h2>
           </Reveal>
@@ -500,7 +500,7 @@ function MissaoVisaoValores() {
           </Reveal>
         </div>
 
-        <div className="mt-6 sm:mt-8 lg:mt-14 grid grid-cols-2 sm:grid-cols-4 gap-3 lg:gap-6">
+        <div className="mt-6 sm:mt-8 lg:mt-14 grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-6">
           {cards.map((c, i) =>
             c.photo ? (
               <Reveal key={c.key} className="rounded-2xl lg:rounded-3xl overflow-hidden">
@@ -559,7 +559,7 @@ function Equipe() {
                     <Reveal className="lg:min-h-[380px] flex flex-col justify-between text-center lg:text-left items-center lg:items-start">
                         <div>
                             <span className="text-sm font-600 uppercase tracking-[0.2em] text-accent">Direção</span>
-                            <h2 className="mt-3 font-display font-900 text-3xl lg:text-5xl text-primary leading-tight">
+                            <h2 className="mt-3 font-display font-900 text-3xl md:text-4xl lg:text-5xl text-primary leading-tight">
                                 Quem conduz o Albert Einstein
                             </h2>
                         </div>
@@ -598,7 +598,7 @@ function Conquistas() {
             <div className="mx-auto max-w-[90rem] px-5 lg:px-10 grid lg:grid-cols-2 gap-14 items-center">
                 <Reveal>
                     <span className="text-sm font-600 uppercase tracking-[0.2em] text-accent">Conquistas</span>
-                    <h2 className="mt-3 font-display font-900 text-3xl lg:text-5xl leading-tight">
+                    <h2 className="mt-3 font-display font-900 text-3xl md:text-4xl lg:text-5xl leading-tight">
                         Resultados que orgulham nossa comunidade
                     </h2>
                     <div className="mt-6 flex gap-4">
@@ -677,7 +677,7 @@ function Estrutura() {
                 <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
                     <Reveal className="max-w-xl">
                         <span className="text-sm font-600 uppercase tracking-[0.2em] text-accent">Estrutura</span>
-                        <h2 className="mt-3 font-display font-900 text-3xl lg:text-5xl text-primary">
+                        <h2 className="mt-3 font-display font-900 text-3xl md:text-4xl lg:text-5xl text-primary">
                             Um ambiente feito para aprender
                         </h2>
                     </Reveal>
@@ -694,7 +694,7 @@ function Estrutura() {
                         </div>
                     </Reveal>
                 </div>
-                <div className="mt-14 grid sm:grid-cols-2 md:grid-cols-3 gap-7">
+                <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-7">
                     {cards.map((c, i) => <Reveal key={c.t} delay={i * 0.08} className="group rounded-3xl overflow-hidden border border-border bg-card hover hover:-translate-y-1 transition-all duration-300">
                             <div className="aspect-[3/2] overflow-hidden">
                                 <ImageCarousel images={c.img} alt={c.t} className="h-full w-full" />
@@ -726,7 +726,7 @@ function Testimonials() {
             <div className="mx-auto max-w-[90rem] px-5 lg:px-10 grid lg:grid-cols-2 gap-12 items-center">
                 <Reveal>
                     <span className="text-sm font-600 uppercase tracking-[0.2em] text-accent">Depoimentos</span>
-                    <h2 className="mt-3 font-display font-900 text-3xl lg:text-5xl text-primary leading-tight">
+                    <h2 className="mt-3 font-display font-900 text-3xl md:text-4xl lg:text-5xl text-primary leading-tight">
                         Histórias reais da nossa comunidade
                     </h2>
                     <p className="mt-4 text-muted-foreground max-w-md">
@@ -790,7 +790,7 @@ function Etapas() {
             <div className="mx-auto max-w-[90rem] px-5 lg:px-10 text-center">
                 <Reveal>
                     <span className="text-sm font-600 uppercase tracking-[0.2em] text-accent">Matrículas abertas</span>
-                    <h2 className="mt-3 font-display font-900 text-3xl lg:text-5xl leading-tight">
+                    <h2 className="mt-3 font-display font-900 text-3xl md:text-4xl lg:text-5xl leading-tight">
                         Escolha a etapa ideal para o seu filho.
                     </h2>
                 </Reveal>
@@ -823,7 +823,7 @@ function Contato() {
             <div className="mx-auto max-w-[90rem] px-5 lg:px-10 grid lg:grid-cols-2 gap-14">
                 <Reveal>
                     <span className="text-sm font-600 uppercase tracking-[0.2em] text-accent">Contato</span>
-                    <h2 className="mt-3 font-display font-900 text-3xl lg:text-5xl text-primary leading-tight">
+                    <h2 className="mt-3 font-display font-900 text-3xl md:text-4xl lg:text-5xl text-primary leading-tight">
                         Venha conhecer o Colégio Albert Einstein
                     </h2>
                     <p className="mt-4 text-muted-foreground">
@@ -910,7 +910,7 @@ function CTAFinal() {
   return <section className="py-20 lg:py-28 bg-background">
             <div className="mx-auto max-w-[90rem] px-5 lg:px-10 grid lg:grid-cols-2 gap-14 items-center">
                 <Reveal>
-                    <h2 className="font-display font-900 text-3xl lg:text-5xl text-primary leading-tight">
+                    <h2 className="font-display font-900 text-3xl md:text-4xl lg:text-5xl text-primary leading-tight">
                         Venha construir o futuro dos seus filhos com a gente.
                     </h2>
                     <p className="mt-5 text-muted-foreground leading-relaxed max-w-md">
@@ -984,7 +984,7 @@ function WhatsAppFloat() {
         </a>;
 }
 const HomePage = () => {
-  return <div className="relative bg-background text-foreground">
+  return <div className="relative overflow-x-hidden bg-background text-foreground">
             <Navbar />
             <main>
                 <Hero />
