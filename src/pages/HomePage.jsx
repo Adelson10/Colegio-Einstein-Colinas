@@ -21,6 +21,11 @@ const IMG = {
   auditorium: '/auditorio.png',
   lion: '/Lion.png',
   entrada: '/Entrada.png',
+  alunos: [
+    '/alunos/IMG_8975.jpeg',
+    '/alunos/IMG_8972.jpeg',
+    '/alunos/IMG_8976.jpeg'
+  ],
 };
 const NAV = [{
   id: 'historia',
@@ -267,8 +272,7 @@ function Hero() {
               >
                 <div className="flex -space-x-3">
                   {[
-                    { src: IMG.founder },
-                    { src: IMG.finance },
+                    ...IMG.alunos.map(src => ({ src })),
                     { icon: GraduationCap }
                   ].map((avatar, index) => (
                     <AvatarDot key={index} src={avatar.src} icon={avatar.icon} style={{ zIndex: index }} />
@@ -333,8 +337,7 @@ function Hero() {
               >
                 <div className="flex -space-x-3">
                   {[
-                    { src: IMG.founder },
-                    { src: IMG.finance },
+                    ...IMG.alunos.map(src => ({ src })),
                     { icon: GraduationCap }
                   ].map((avatar, index) => (
                     <AvatarDot key={index} src={avatar.src} icon={avatar.icon} style={{ zIndex: index }} />
