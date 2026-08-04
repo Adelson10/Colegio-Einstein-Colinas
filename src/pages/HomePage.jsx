@@ -388,20 +388,40 @@ function Hero() {
     </section>
   );
 }
+const ROW_LOGOS = [
+  { src: 'LogoESBaixa_cor.PNG', ratio: 1921 / 672 },
+  { src: 'Logo_Roxo_CMYK.png', ratio: 14826 / 5407 },
+  { src: 'educacross-site.png', ratio: 305 / 148 },
+  { src: 'logo_eduall_bs_cor.png', ratio: 4501 / 1459 },
+  { src: 'mm_original_pt.png', ratio: 4267 / 2166 },
+  { src: 'sistema_anglo.png', ratio: 2624 / 2624 },
+];
 function Marquee() {
-  const items = ['3º lugar do Estado', 'Excelência acadêmica', '1º lugar do Município', 'Parceria UNOPAR', 'Fundado em 1989', 'Entre as melhores escolas'];
-  const loop = [...items, ...items];
+  const loop = [...ROW_LOGOS, ...ROW_LOGOS];
   return <div className="relative bg-transparent mx-auto max-w-[90rem] w-full px-5 lg:px-10 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
-            <div className="flex whitespace-nowrap animate-marquee w-max">
-                {loop.map((t, i) =>
-                <span key={i} className="opacity-80 mx-8 inline-flex items-center gap-4 font-display font-black text-2xl uppercase tracking-wide text-primary">
-                  {t}
-                </span>)}
+            <div className="flex items-center whitespace-nowrap animate-marquee w-max gap-8">
+                {loop.map(({ src, ratio }, i) =>
+                <span
+                  key={i}
+                  aria-hidden="true"
+                  className="mx-8 inline-block h-8 lg:h-16 shrink-0 bg-primary"
+                  style={{
+                    aspectRatio: ratio,
+                    WebkitMaskImage: `url(/row/${src})`,
+                    maskImage: `url(/row/${src})`,
+                    WebkitMaskSize: 'contain',
+                    maskSize: 'contain',
+                    WebkitMaskRepeat: 'no-repeat',
+                    maskRepeat: 'no-repeat',
+                    WebkitMaskPosition: 'center',
+                    maskPosition: 'center',
+                  }}
+                />)}
             </div>
         </div>;
 }
 function Historia() {
-  return <section id="historia" className="min-h-screen flex flex-col justify-around py-20 lg:py-28 bg-secondary/50">
+  return <section id="historia" className="min-h-screen flex flex-col justify-between py-20 lg:py-28 bg-secondary/50">
             <Marquee />
             <div className="mx-auto max-w-[90rem] px-5 lg:px-10 grid lg:grid-cols-2 gap-14 items-center">
                 <Reveal className="relative">
