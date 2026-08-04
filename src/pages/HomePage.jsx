@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { GraduationCap, Award, Trophy, Users, BookOpen, Star, Menu, X, MapPin, Phone, Mail, Clock, CheckCircle2, Medal, Building2, Sparkles, Target, Eye, HeartHandshake, ArrowUpRight, ArrowUp, ArrowDown, Quote } from 'lucide-react';
+import { GraduationCap, Award, Trophy, Users, BookOpen, Star, Menu, X, MapPin, Phone, Mail, Clock, CheckCircle2, Medal, Building2, Sparkles, Target, Eye, HeartHandshake, ArrowUpRight, ArrowUp, ArrowDown, Quote, Landmark } from 'lucide-react';
+import LogoIcon from '../../public/logo.jsx';
 const LOGO = '/logo.png';
 const IMG = {
   building: 'https://horizons-cdn.hostinger.com/1efc1057-2848-415a-b5c2-e492130a8d44/d8f2f93b491959f0074077ffa7489a29.png',
@@ -17,7 +18,9 @@ const IMG = {
   // NOVOS: coloque aqui os caminhos das fotos reais de cada espaço
   playground: '/parquinho.png',
   lab: '/laboratorio.png',
-  auditorium: '/auditorio.png'
+  auditorium: '/auditorio.png',
+  lion: '/Lion.png',
+  entrada: '/Entrada.png',
 };
 const NAV = [{
   id: 'historia',
@@ -96,6 +99,10 @@ function PillButton({
     ghost: {
       wrap: 'border border-white/40 text-white hover:bg-white/10',
       icon: 'bg-white/15'
+    },
+    invert: {
+      wrap: 'bg-white text-primary hover:brightness-95',
+      icon: 'bg-primary/10'
     }
   };
   const s = styles[variant] || styles.solid;
@@ -164,8 +171,19 @@ function ImageCarousel({ images, alt, className = '', interval = 4000 }) {
 function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [overDark, setOverDark] = useState(false);
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 20);
+      const missao = document.getElementById('missao');
+      if (missao) {
+        const rect = missao.getBoundingClientRect();
+        setOverDark(rect.top <= 0 && rect.top >= -100);
+      } else {
+        setOverDark(false);
+      }
+    };
+    onScroll();
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
@@ -175,27 +193,27 @@ function Navbar() {
       behavior: 'smooth'
     });
   };
-  return <header className={`sticky top-0 inset-x-0 z-50 bg-background/95 backdrop-blur transition-shadow duration-300 ${scrolled ? 'shadow-md border-b border-border' : 'border-b border-transparent'}`}>
+  return <header className={`${scrolled ? 'fixed' : 'absolute'} top-0 inset-x-0 z-50 transition-colors duration-300 ${overDark ? 'bg-transparent border-b border-transparent' : scrolled ? 'bg-background border-b border-border' : 'bg-transparent border-b border-transparent'}`}>
             <nav className="mx-auto max-w-[90rem] px-5 lg:px-10 h-20 flex items-center justify-between">
                 <button onClick={() => go('topo')} className="flex items-center gap-3">
-                    <span className="grid place-items-center h-12 w-12 rounded-full bg-white shadow-sm border border-border overflow-hidden">
+                    <span className="grid place-items-center h-12 w-12 rounded-full bg-white border border-border overflow-hidden">
                         <img src={LOGO} alt="Colégio Albert Einstein" className="h-full w-full object-contain p-0.5" />
                     </span>
                     <span className="leading-tight text-left hidden sm:block">
-                       <span className="block font-display font-900 text-lg tracking-tight text-primary">COLÉGIO EINSTEIN</span>
+                       <span className={`block font-display font-900 text-lg tracking-tight transition-colors duration-300 ${overDark ? 'text-white' : 'text-primary'}`}>COLÉGIO EINSTEIN</span>
                         <span className="block text-[11px] uppercase tracking-[0.22em] text-accent">COLINAS DO TOCANTINS</span>
                     </span>
                 </button>
                 <div className="hidden lg:flex items-center gap-8">
-                    {NAV.map(n => <button key={n.id} onClick={() => go(n.id)} className="text-sm font-500 text-foreground/70 hover:text-primary transition-colors">
+                    {NAV.map(n => <button key={n.id} onClick={() => go(n.id)} className={`text-sm font-500 transition-colors ${overDark ? 'text-white/80 hover:text-white' : 'text-foreground/70 hover:text-primary'}`}>
                             {n.label}
                         </button>)}
                 </div>
                 <div className="hidden lg:flex items-center gap-3">
-                    <PillButton variant="outline" onClick={() => go('contato')}>Fale conosco</PillButton>
-                    <PillButton href={WHATSAPP_URL} variant="solid">Matrículas</PillButton>
+                    <PillButton variant={overDark ? 'ghost' : 'outline'} onClick={() => go('contato')}>Fale conosco</PillButton>
+                    <PillButton href={WHATSAPP_URL} variant={overDark ? 'invert' : 'solid'}>Matrículas</PillButton>
                 </div>
-                <button className="lg:hidden text-primary" onClick={() => setOpen(!open)} aria-label="Menu">
+                <button className={`lg:hidden transition-colors duration-300 ${overDark ? 'text-white' : 'text-primary'}`} onClick={() => setOpen(!open)} aria-label="Menu">
                     {open ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
                 </button>
             </nav>
@@ -208,13 +226,19 @@ function Navbar() {
         </header>;
 }
 function AvatarDot({ src, icon: Icon, style }) {
-  return <span style={style} className="relative grid place-items-center h-14 w-14 rounded-full ring-2 ring-background overflow-hidden bg-[color-mix(in_srgb,hsl(var(--accent))_15%,hsl(var(--background)))] text-accent shadow-sm">
+  return <span style={style} className="relative grid place-items-center h-14 w-14 rounded-full ring-2 ring-background overflow-hidden bg-[color-mix(in_srgb,hsl(var(--accent))_15%,hsl(var(--background)))] text-accent">
             {src ? <img src={src} alt="" className="h-full w-full object-cover" /> : <Icon className="h-8 w-8" />}
         </span>;
 }
 function Hero() {
   return (
-    <section id="topo" className="relative overflow-hidden bg-background min-h-[calc(100dvh-5rem)] flex flex-col">
+    <section id="topo" className="relative overflow-hidden bg-background min-h-[100dvh] flex flex-col">
+      <img
+        src={IMG.lion}
+        alt=""
+        aria-hidden="true"
+        className="pointer-events-none select-none absolute inset-0 h-full w-full object-cover object-center opacity-[0.1] grayscale contrast-125 z-3"
+      />
       <div className="flex-1 flex items-center py-14 lg:py-16">
         <div className="mx-auto max-w-[90rem] w-full px-5 lg:px-10">
           <div className="relative grid lg:grid-cols-[0.8fr_1.3fr_0.9fr] gap-8 lg:gap-6 items-center">
@@ -224,14 +248,14 @@ function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
               >
-                <img
-                  src={IMG.founder}
-                  alt="Fundadora do Colégio Albert Einstein"
-                  loading="eager"
-                  fetchpriority="high"
-                  decoding="async"
-                  className="rounded-[2rem] aspect-[4/5] w-full object-cover"
-                />
+                <div className="relative overflow-hidden aspect-[4/5] w-full grid place-items-center">
+                  <LogoIcon
+                    role="img"
+                    aria-label="Colégio Albert Einstein"
+                    preserveAspectRatio="xMidYMid meet"
+                    className="h-full w-full max-h-[70%] max-w-[70%]"
+                  />
+                </div>
               </motion.div>
 
               <motion.div
@@ -350,7 +374,7 @@ function Hero() {
                 transition={{ duration: 0.7, delay: 0.3 }}
               >
                 <img
-                  src={IMG.playground}
+                  src={IMG.entrada}
                   alt="Alunos do Colégio Albert Einstein"
                   loading="eager"
                   decoding="async"
@@ -361,59 +385,29 @@ function Hero() {
           </div>
         </div>
       </div>
-      <Marquee />
     </section>
   );
 }
 function Marquee() {
   const items = ['3º lugar do Estado', 'Excelência acadêmica', '1º lugar do Município', 'Parceria UNOPAR', 'Fundado em 1989', 'Entre as melhores escolas'];
   const loop = [...items, ...items];
-  return <div className="relative bg-background py-8 mx-auto max-w-[90rem] w-full px-5 lg:px-10 overflow-hidden">
+  return <div className="relative bg-transparent mx-auto max-w-[90rem] w-full px-5 lg:px-10 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
             <div className="flex whitespace-nowrap animate-marquee w-max">
                 {loop.map((t, i) =>
-                <span key={i} className="opacity-80 mx-8 inline-flex items-center gap-4 font-display font-black text-xl uppercase tracking-wide text-primary">
+                <span key={i} className="opacity-80 mx-8 inline-flex items-center gap-4 font-display font-black text-2xl uppercase tracking-wide text-primary">
                   {t}
                 </span>)}
             </div>
-            <div className="pointer-events-none absolute inset-y-0 left-0 w-24 lg:w-40 bg-gradient-to-r from-background to-transparent" />
-            <div className="pointer-events-none absolute inset-y-0 right-0 w-24 lg:w-40 bg-gradient-to-l from-background to-transparent" />
         </div>;
 }
-const STATS = [{
-  icon: Clock,
-  value: '35+',
-  label: 'Anos de história'
-}, {
-  icon: Trophy,
-  value: '1º',
-  label: 'Lugar no município'
-}, {
-  icon: Medal,
-  value: '3º',
-  label: 'Lugar no estado'
-}, {
-  icon: BookOpen,
-  value: '20+',
-  label: 'Anos de parceria UNOPAR'
-}];
-function Stats() {
-  return <section className="bg-background py-16 lg:py-20">
-            <div className="mx-auto max-w-[90rem] px-5 lg:px-10 grid grid-cols-2 lg:grid-cols-4 gap-6">
-                {STATS.map((s, i) => <Reveal key={s.label} delay={i * 0.08} className="text-center rounded-3xl border border-border bg-card p-7 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                        <s.icon className="mx-auto h-8 w-8 text-accent" strokeWidth={1.8} />
-                        <div className="mt-4 font-display font-900 text-4xl text-primary">{s.value}</div>
-                        <div className="mt-1 text-sm text-muted-foreground">{s.label}</div>
-                    </Reveal>)}
-            </div>
-        </section>;
-}
 function Historia() {
-  return <section id="historia" className="py-20 lg:py-28 bg-secondary/50">
+  return <section id="historia" className="min-h-screen flex flex-col justify-around py-20 lg:py-28 bg-secondary/50">
+            <Marquee />
             <div className="mx-auto max-w-[90rem] px-5 lg:px-10 grid lg:grid-cols-2 gap-14 items-center">
                 <Reveal className="relative">
                     <div className="absolute -top-5 -left-5 h-24 w-24 rounded-2xl bg-accent/20 -z-0" />
-                    <ImageCarousel images={IMG.classroom} alt="Sala de aula do colégio" className="relative rounded-3xl shadow-xl aspect-[4/3] w-full" />
-                    <div className="absolute -bottom-6 -right-4 lg:-right-8 bg-primary text-primary-foreground rounded-2xl p-5 shadow-xl max-w-[200px] animate-floaty z-10">
+                    <ImageCarousel images={IMG.classroom} alt="Sala de aula do colégio" className="relative rounded-3xl aspect-[4/3] w-full" />
+                    <div className="absolute -bottom-6 -right-4 lg:-right-8 bg-primary text-primary-foreground rounded-2xl p-5 max-w-[200px] z-10">
                         <div className="font-display font-900 text-3xl text-accent">1989</div>
                         <p className="text-xs text-primary-foreground/80 mt-1">Ano de fundação do colégio</p>
                     </div>
@@ -441,11 +435,9 @@ function Historia() {
 
 const VALORES = [
   'Excelência pedagógica',
-  'Inovação',
   'Compromisso com a aprendizagem',
   'Protagonismo do estudante',
   'Parceria entre escola, família e comunidade',
-  'Ética e responsabilidade'
 ];
 
 function MissaoVisaoValores() {
@@ -475,21 +467,21 @@ function MissaoVisaoValores() {
   ];
 
   return (
-    <section id="missao" className="relative overflow-hidden bg-primary text-primary-foreground py-20 lg:py-28">
+    <section id="missao" className="relative overflow-hidden bg-primary text-primary-foreground h-screen flex flex-col pt-20 sm:pt-24 pb-4 sm:pb-6 lg:pb-8">
       <div className="pointer-events-none absolute -top-32 -right-24 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
-      <div className="relative mx-auto max-w-[90rem] px-5 lg:px-10">
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
+      <div className="relative flex-1 min-h-0 flex flex-col justify-center mx-auto max-w-[90rem] w-full px-5 lg:px-10">
+        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 sm:gap-6 lg:gap-8">
           <Reveal className="max-w-xl">
-            <span className="text-sm font-600 uppercase tracking-[0.2em] text-accent">Nossos pilares</span>
-            <h2 className="mt-3 font-display font-900 text-3xl lg:text-5xl leading-tight">
+            <span className="text-xs sm:text-sm font-600 uppercase tracking-[0.2em] text-accent">Nossos pilares</span>
+            <h2 className="mt-1.5 sm:mt-3 font-display font-900 text-xl sm:text-3xl lg:text-5xl leading-tight">
               O que nos guia todos os dias
             </h2>
           </Reveal>
           <Reveal delay={0.1} className="max-w-md">
-            <p className="text-primary-foreground/75 leading-relaxed">
+            <p className="hidden sm:block text-primary-foreground/75 leading-relaxed text-sm lg:text-base">
               Missão, visão e valores que orientam cada decisão pedagógica e cada relação construída dentro do Colégio Albert Einstein.
             </p>
-            <div className="mt-5">
+            <div className="mt-2 sm:mt-5">
               <PillButton variant="accent" onClick={() => document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' })}>
                 Fale conosco
               </PillButton>
@@ -497,34 +489,34 @@ function MissaoVisaoValores() {
           </Reveal>
         </div>
 
-        <div className="mt-14 grid sm:grid-cols-2 xl:grid-cols-4 gap-6">
+        <div className="mt-6 sm:mt-8 lg:mt-14 grid grid-cols-2 sm:grid-cols-4 gap-3 lg:gap-6">
           {cards.map((c, i) =>
             c.photo ? (
-              <Reveal key={c.key} className="rounded-3xl overflow-hidden min-h-[220px] xl:min-h-0">
+              <Reveal key={c.key} className="rounded-2xl lg:rounded-3xl overflow-hidden">
                 <img src={IMG.classroom[1]} alt="Alunos em sala de aula" loading="lazy" decoding="async" className="h-full w-full object-cover" />
               </Reveal>
             ) : (
               <Reveal
                 key={c.key}
                 delay={i * 0.1}
-                className={`rounded-3xl p-8 ${c.highlight ? 'bg-white shadow-2xl' : 'bg-white/5 border border-white/10'}`}
+                className={`rounded-2xl lg:rounded-3xl p-3 lg:p-8 ${c.highlight ? 'bg-white' : 'bg-white/5'} flex flex-col justify-between`}
               >
-                <span className="grid place-items-center h-12 w-12 rounded-xl bg-accent/15 text-accent">
-                  <c.icon className="h-6 w-6" strokeWidth={1.8} />
-                </span>
-                <h3 className={`mt-5 font-display font-700 text-xl ${c.highlight ? 'text-primary' : ''}`}>{c.title}</h3>
-                {c.highlight ? (
-                  <ul className="mt-3 space-y-2">
-                    {VALORES.map(v => (
-                      <li key={v} className="flex items-start gap-2.5 text-sm text-foreground">
-                        <CheckCircle2 className="h-4 w-4 text-accent shrink-0 mt-0.5" />
-                        {v}
-                      </li>
-                    ))}
-                  </ul>
-                ) : (
-                  <p className="mt-3 text-sm text-primary-foreground/70 leading-relaxed text-justify">{c.text}</p>
-                )}
+                <c.icon className={`h-5 w-5 lg:h-10 lg:w-10 ${c.highlight ? 'text-accent' : 'text-white'}`}  strokeWidth={1.8} />
+                <div className="flex flex-col gap-1 lg:gap-1.5 min-h-0">
+                  <h3 className={`mt-1.5 lg:mt-5 font-display font-700 text-xs lg:text-2xl leading-snug ${c.highlight ? 'text-primary' : ''}`}>{c.title}</h3>
+                  {c.highlight ? (
+                    <ul className="mt-1 lg:mt-3 space-y-0.5 lg:space-y-2 overflow-hidden">
+                      {VALORES.map(v => (
+                        <li key={v} className="flex items-start gap-1 lg:gap-2.5 text-[9px] lg:text-sm text-foreground text-balance leading-snug">
+                          <CheckCircle2 className="hidden lg:block h-4 w-4 text-accent shrink-0 mt-0.5" />
+                          {v}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="mt-1 lg:mt-3 text-[10px] lg:text-sm text-primary-foreground/70 leading-snug lg:leading-relaxed text-balance line-clamp-4 lg:line-clamp-none">{c.text}</p>
+                  )}
+                </div>
               </Reveal>
             )
           )}
@@ -537,36 +529,55 @@ const TEAM = [{
   img: IMG.founder,
   name: 'Suelena Alves Carvalho Torres',
   role: 'Fundadora e Diretora',
+  icon: GraduationCap,
   text: 'Idealizadora do colégio em 1989, dedica sua vida à educação, guiando a instituição com visão e cuidado.'
 }, {
   img: IMG.finance,
   name: 'Odilon Torres de Silveira',
   role: 'Diretor Financeiro',
+  icon: Landmark,
   text: 'Responsável pela gestão financeira e administrativa, garantindo a solidez e a continuidade do projeto educacional.'
 }];
 function Equipe() {
-  return <section id="equipe" className="py-20 lg:py-28">
-            <div className="mx-auto max-w-[90rem] px-5 lg:px-10">
-                <Reveal className="text-center max-w-2xl mx-auto">
-                    <span className="text-sm font-600 uppercase tracking-[0.2em] text-accent">Direção</span>
-                    <h2 className="mt-3 font-display font-900 text-3xl lg:text-5xl text-primary">
-                        Quem conduz o Albert Einstein
-                    </h2>
-                    <p className="mt-4 text-muted-foreground">
-                        Uma equipe comprometida com a excelência e o desenvolvimento de cada estudante.
-                    </p>
-                </Reveal>
-                <div className="mt-14 grid sm:grid-cols-2 gap-8 max-w-3xl mx-auto">
-                    {TEAM.map((m, i) => <Reveal key={m.name} delay={i * 0.1} className="group rounded-3xl border border-border bg-card overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                            <div className="aspect-[3/4] overflow-hidden">
-                                <img src={m.img} alt={m.name} loading="lazy" decoding="async" className="h-full w-full object-cover group-hover:scale-[1.04] transition-transform duration-500" />
-                            </div>
-                            <div className="p-6">
-                                <h3 className="font-display font-700 text-xl text-primary">{m.name}</h3>
-                                <span className="inline-block mt-1 text-sm font-600 text-accent">{m.role}</span>
-                                <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{m.text}</p>
-                            </div>
-                        </Reveal>)}
+  const [active, setActive] = useState(0);
+  const current = TEAM[active];
+
+  return <section id="equipe" className="min-h-screen flex flex-col justify-center py-20 lg:py-32 overflow-hidden">
+            <div className="mx-auto max-w-[90rem] px-5 lg:px-10 w-full">
+                <div className="grid lg:grid-cols-3 gap-12 lg:gap-8 items-center">
+                    <Reveal className="lg:min-h-[380px] flex flex-col justify-between text-center lg:text-left items-center lg:items-start">
+                        <div>
+                            <span className="text-sm font-600 uppercase tracking-[0.2em] text-accent">Direção</span>
+                            <h2 className="mt-3 font-display font-900 text-3xl lg:text-5xl text-primary leading-tight">
+                                Quem conduz o Albert Einstein
+                            </h2>
+                        </div>
+                        <p className="mt-8 lg:mt-0 text-muted-foreground leading-relaxed max-w-xs">
+                            Uma equipe comprometida com a excelência e o desenvolvimento de cada estudante.
+                        </p>
+                    </Reveal>
+
+                    <Reveal delay={0.1} className="flex flex-col items-center gap-6">
+                        <current.icon key={current.role} className="h-12 w-12 text-accent" strokeWidth={1.8} />
+                        <div className="relative w-full max-w-sm lg:max-w-md aspect-[9/12] rounded-3xl overflow-hidden bg-accent/80">
+                            <img key={current.img} src={current.img} alt={current.name} loading="lazy" decoding="async" className="w-full object-cover object-top" />
+                        </div>
+                    </Reveal>
+
+                    <Reveal delay={0.2} className="lg:min-h-[380px] flex flex-col justify-center gap-8 text-center lg:text-left items-center lg:items-start">
+                        <p className="text-lg lg:text-xl text-primary leading-relaxed text-balance">
+                            {current.text}
+                        </p>
+                        <div className="flex items-center gap-3">
+                            {TEAM.map((m, i) => <button key={m.name} onClick={() => setActive(i)} aria-label={m.name} className={`h-12 w-12 rounded-full overflow-hidden border-2 shrink-0 transition ${active === i ? 'border-accent' : 'border-transparent opacity-50 hover:opacity-100'}`}>
+                                    <img src={m.img} alt={m.name} loading="lazy" decoding="async" className="h-full w-full object-cover" />
+                                </button>)}
+                        </div>
+                        <div>
+                            <h3 className="font-display font-700 text-xl text-primary">{current.name}</h3>
+                            <span className="text-sm text-muted-foreground">{current.role}</span>
+                        </div>
+                    </Reveal>
                 </div>
             </div>
         </section>;
@@ -613,7 +624,7 @@ function Conquistas() {
                     </div>
                 </Reveal>
                 <Reveal delay={0.1} className="relative">
-                    <img src={IMG.trophy} alt="Alunos comemorando conquista acadêmica" loading="lazy" decoding="async" className="rounded-3xl shadow-2xl object-cover aspect-[4/3] w-full" />
+                    <img src={IMG.trophy} alt="Alunos comemorando conquista acadêmica" loading="lazy" decoding="async" className="rounded-3xl object-cover aspect-[4/3] w-full" />
                 </Reveal>
             </div>
         </section>;
@@ -673,7 +684,7 @@ function Estrutura() {
                     </Reveal>
                 </div>
                 <div className="mt-14 grid sm:grid-cols-2 md:grid-cols-3 gap-7">
-                    {cards.map((c, i) => <Reveal key={c.t} delay={i * 0.08} className="group rounded-3xl overflow-hidden border border-border bg-card shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+                    {cards.map((c, i) => <Reveal key={c.t} delay={i * 0.08} className="group rounded-3xl overflow-hidden border border-border bg-card hover hover:-translate-y-1 transition-all duration-300">
                             <div className="aspect-[3/2] overflow-hidden">
                                 <ImageCarousel images={c.img} alt={c.t} className="h-full w-full" />
                             </div>
@@ -710,7 +721,7 @@ function Testimonials() {
                     <p className="mt-4 text-muted-foreground max-w-md">
                         Famílias e alunos que viveram de perto a proposta pedagógica do Colégio Albert Einstein.
                     </p>
-                    <div className="mt-8 flex gap-5 rounded-3xl bg-card border border-border p-7 shadow-sm">
+                    <div className="mt-8 flex gap-5 rounded-3xl bg-card border border-border p-7">
                         <div className="flex flex-col items-center gap-2 shrink-0">
                             <span className="grid place-items-center h-8 w-8 rounded-full bg-accent/15 text-accent">
                                 <ArrowUp className="h-4 w-4" />
@@ -731,13 +742,13 @@ function Testimonials() {
                 </Reveal>
                 <Reveal delay={0.1} className="flex justify-center lg:justify-end">
                     <div className="flex flex-col gap-4">
-                        <span className="grid place-items-center h-16 w-16 rounded-full ring-4 ring-background overflow-hidden bg-accent/15 text-accent shadow-lg">
+                        <span className="grid place-items-center h-16 w-16 rounded-full ring-4 ring-background overflow-hidden bg-accent/15 text-accent">
                             <img src={IMG.founder} alt="" className="h-full w-full object-cover" />
                         </span>
-                        <span className="grid place-items-center h-16 w-16 rounded-full ring-4 ring-background overflow-hidden bg-accent/15 text-accent shadow-lg ml-8">
+                        <span className="grid place-items-center h-16 w-16 rounded-full ring-4 ring-background overflow-hidden bg-accent/15 text-accent ml-8">
                             <img src={IMG.finance} alt="" className="h-full w-full object-cover" />
                         </span>
-                        <span className="grid place-items-center h-16 w-16 rounded-full ring-4 ring-background overflow-hidden bg-accent/15 text-accent shadow-lg ml-16">
+                        <span className="grid place-items-center h-16 w-16 rounded-full ring-4 ring-background overflow-hidden bg-accent/15 text-accent ml-16">
                             <GraduationCap className="h-6 w-6" />
                         </span>
                     </div>
@@ -773,7 +784,7 @@ function Etapas() {
                     </h2>
                 </Reveal>
                 <div className="mt-14 grid sm:grid-cols-2 gap-6 text-left">
-                    {ETAPAS.map((e, i) => <Reveal key={e.key} delay={i * 0.1} className={`rounded-3xl p-8 ${e.highlight ? 'bg-white text-foreground shadow-2xl' : 'bg-white/5 border border-white/10'}`}>
+                    {ETAPAS.map((e, i) => <Reveal key={e.key} delay={i * 0.1} className={`rounded-3xl p-8 ${e.highlight ? 'bg-white text-foreground' : 'bg-white/5 border border-white/10'}`}>
                             <h3 className={`font-display font-700 text-lg ${e.highlight ? 'text-primary' : ''}`}>{e.title}</h3>
                             <div className="mt-4 flex items-end gap-2">
                                 <span className={`font-display font-900 text-5xl ${e.highlight ? 'text-primary' : 'text-accent'}`}>{e.range}</span>
@@ -847,7 +858,7 @@ function Contato() {
                     </div>
                 </Reveal>
                 <Reveal delay={0.1}>
-                    <div className="rounded-3xl border border-border bg-card p-7 shadow-sm">
+                    <div className="rounded-3xl border border-border bg-card p-7">
                         <ContactFields />
                     </div>
                 </Reveal>
@@ -900,7 +911,7 @@ function CTAFinal() {
                     </div>
                 </Reveal>
                 <Reveal delay={0.1}>
-                    <ImageCarousel images={IMG.classroom} alt="Alunos do Colégio Albert Einstein" className="rounded-3xl shadow-xl aspect-[4/3] w-full" />
+                    <ImageCarousel images={IMG.classroom} alt="Alunos do Colégio Albert Einstein" className="rounded-3xl aspect-[4/3] w-full" />
                 </Reveal>
             </div>
         </section>;
@@ -955,18 +966,17 @@ function Footer() {
         </footer>;
 }
 function WhatsAppFloat() {
-  return <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" aria-label="Fale conosco pelo WhatsApp" className="fixed bottom-6 right-6 z-50 grid place-items-center h-14 w-14 rounded-full bg-[#25D366] text-white shadow-xl hover:scale-105 active:scale-95 transition-transform animate-floaty">
+  return <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" aria-label="Fale conosco pelo WhatsApp" className="fixed bottom-6 right-6 z-50 grid place-items-center h-14 w-14 rounded-full bg-[#25D366] text-white hover:scale-105 active:scale-95 transition-transform animate-floaty">
             <svg viewBox="0 0 32 32" className="h-7 w-7 fill-current">
                 <path d="M16.001 3.2c-7.07 0-12.8 5.73-12.8 12.8 0 2.26.6 4.44 1.73 6.37L3.2 28.8l6.6-1.7a12.75 12.75 0 0 0 6.2 1.58h.01c7.07 0 12.8-5.73 12.8-12.8s-5.73-12.68-12.81-12.68zm0 23.36h-.01a10.5 10.5 0 0 1-5.37-1.47l-.38-.23-3.92 1.02 1.04-3.82-.25-.4a10.55 10.55 0 0 1-1.6-5.56c0-5.84 4.75-10.6 10.6-10.6 2.83 0 5.49 1.1 7.49 3.11a10.5 10.5 0 0 1 3.1 7.49c-.01 5.84-4.76 10.46-10.7 10.46zm5.82-7.85c-.32-.16-1.89-.93-2.18-1.04-.29-.11-.5-.16-.72.16-.21.32-.82 1.04-1 1.25-.19.21-.37.24-.69.08-.32-.16-1.34-.49-2.55-1.57-.94-.84-1.58-1.87-1.76-2.19-.19-.32-.02-.49.14-.65.14-.14.32-.37.48-.55.16-.19.21-.32.32-.53.11-.21.05-.4-.03-.56-.08-.16-.72-1.73-.98-2.37-.26-.62-.53-.54-.72-.55-.19-.01-.4-.01-.61-.01a1.18 1.18 0 0 0-.85.4c-.29.32-1.11 1.08-1.11 2.64 0 1.55 1.14 3.05 1.3 3.26.16.21 2.24 3.42 5.43 4.79.76.33 1.35.52 1.81.67.76.24 1.45.21 2 .13.61-.09 1.89-.77 2.16-1.51.27-.75.27-1.39.19-1.51-.08-.13-.29-.21-.61-.37z" />
             </svg>
         </a>;
 }
 const HomePage = () => {
-  return <div className="bg-background text-foreground">
+  return <div className="relative bg-background text-foreground">
             <Navbar />
             <main>
                 <Hero />
-                <Stats />
                 <Historia />
                 <MissaoVisaoValores />
                 <Equipe />
