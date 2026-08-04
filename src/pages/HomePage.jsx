@@ -966,7 +966,7 @@ function Footer() {
                         </ul>
                     </div>
                 </div>
-                <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-primary-foreground/60">
+                <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-primary-foreground/60 sm:pr-20">
                     <p>© {new Date().getFullYear()} Colégio Albert Einstein. Todos os direitos reservados.</p>
                     <p>Parceria pedagógica UNOPAR desde 2004.</p>
                 </div>
