@@ -32,11 +32,11 @@ const NAV = [{
   id: 'equipe',
   label: 'Direção'
 }, {
-  id: 'conquistas',
-  label: 'Conquistas'
-}, {
   id: 'estrutura',
   label: 'Estrutura'
+}, {
+  id: 'conquistas',
+  label: 'Conquistas'
 }, {
   id: 'contato',
   label: 'Contato'
@@ -175,13 +175,13 @@ function Navbar() {
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 20);
-      const missao = document.getElementById('missao');
-      if (missao) {
-        const rect = missao.getBoundingClientRect();
-        setOverDark(rect.top <= 0 && rect.top >= -100);
-      } else {
-        setOverDark(false);
-      }
+      const isOverDark = ['missao', 'conquistas'].some(id => {
+        const el = document.getElementById(id);
+        if (!el) return false;
+        const rect = el.getBoundingClientRect();
+        return rect.top <= 0 && rect.top >= -100;
+      });
+      setOverDark(isOverDark);
     };
     onScroll();
     window.addEventListener('scroll', onScroll);
@@ -253,7 +253,7 @@ function Hero() {
                     role="img"
                     aria-label="Colégio Albert Einstein"
                     preserveAspectRatio="xMidYMid meet"
-                    className="h-full w-full max-h-[70%] max-w-[70%]"
+                    className="h-full w-full max-h-[85%] max-w-[85%]"
                   />
                 </div>
               </motion.div>
@@ -553,6 +553,14 @@ function Equipe() {
   const [active, setActive] = useState(0);
   const current = TEAM[active];
 
+  useEffect(() => {
+    if (TEAM.length <= 1) return;
+    const timer = setInterval(() => {
+      setActive(i => (i + 1) % TEAM.length);
+    }, 12000);
+    return () => clearInterval(timer);
+  }, [active]);
+
   return <section id="equipe" className="min-h-0 min-[820px]:min-h-screen flex flex-col justify-center py-20 lg:py-32 overflow-hidden">
             <div className="mx-auto max-w-[90rem] px-5 lg:px-10 w-full">
                 <div className="grid lg:grid-cols-3 gap-12 lg:gap-8 items-center">
@@ -580,7 +588,7 @@ function Equipe() {
                             {current.text}
                         </p>
                         <div className="flex items-center gap-3">
-                            {TEAM.map((m, i) => <button key={m.name} onClick={() => setActive(i)} aria-label={m.name} className={`h-12 w-12 rounded-full overflow-hidden border-2 shrink-0 transition ${active === i ? 'border-accent' : 'border-transparent opacity-50 hover:opacity-100'}`}>
+                            {TEAM.map((m, i) => <button key={m.name} onClick={() => setActive(i)} aria-label={m.name} className={`h-22 w-16 rounded-3xl overflow-hidden border-2 shrink-0 transition ${active === i ? 'border-accent' : 'border-transparent opacity-50 hover:opacity-100'}`}>
                                     <img src={m.img} alt={m.name} loading="lazy" decoding="async" className="h-full w-full object-cover" />
                                 </button>)}
                         </div>
@@ -594,51 +602,60 @@ function Equipe() {
         </section>;
 }
 function Conquistas() {
-  return <section id="conquistas" className="py-20 lg:py-28 bg-primary text-primary-foreground overflow-hidden">
-            <div className="mx-auto max-w-[90rem] px-5 lg:px-10 grid lg:grid-cols-2 gap-14 items-center">
-                <Reveal>
-                    <span className="text-sm font-600 uppercase tracking-[0.2em] text-accent">Conquistas</span>
-                    <h2 className="mt-3 font-display font-900 text-3xl md:text-4xl lg:text-5xl leading-tight">
-                        Resultados que orgulham nossa comunidade
-                    </h2>
-                    <div className="mt-6 flex gap-4">
-                        <Quote className="h-8 w-8 text-accent shrink-0" />
-                        <p className="text-primary-foreground/80 leading-relaxed text-justify">
-                            No último ano, o Colégio Albert Einstein alcançou o <strong className="text-accent">3º lugar
-                            do estado</strong> e o <strong className="text-accent">1º lugar do município</strong>,
-                            reafirmando sua posição entre as melhores escolas da região. Uma conquista construída pelo
-                            empenho de alunos, professores e famílias.
-                        </p>
-                    </div>
-                    <div className="mt-8 grid grid-cols-2 gap-4">
-                        {[{
-            icon: Medal,
-            t: '3º lugar do Estado',
-            s: 'Desempenho acadêmico'
-          }, {
-            icon: Trophy,
-            t: '1º lugar do Município',
-            s: 'Referência local'
-          }, {
-            icon: Award,
-            t: 'Entre as melhores',
-            s: 'Reconhecimento constante'
-          }, {
-            icon: Star,
-            t: 'Excelência contínua',
-            s: 'Compromisso diário'
-          }].map(c => <div key={c.t} className="rounded-2xl bg-white/5 border border-white/10 p-5 hover:bg-white/10 transition-colors">
-                                <c.icon className="h-7 w-7 text-accent" strokeWidth={1.8} />
-                                <div className="mt-3 font-600 text-sm">{c.t}</div>
-                                <div className="text-xs text-primary-foreground/60">{c.s}</div>
-                            </div>)}
-                    </div>
-                </Reveal>
-                <Reveal delay={0.1} className="relative">
-                    <img src={IMG.trophy} alt="Alunos comemorando conquista acadêmica" loading="lazy" decoding="async" className="rounded-3xl object-cover aspect-[4/3] w-full" />
-                </Reveal>
+  return (
+    <section id="conquistas" className="relative overflow-hidden bg-primary text-primary-foreground min-h-0 min-[820px]:min-h-[100dvh] flex flex-col pt-20 sm:pt-24 pb-4 sm:pb-6 lg:pb-8">
+      <div className="pointer-events-none absolute -top-32 -right-24 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
+      <div className="relative flex-1 min-h-0 flex flex-col justify-center mx-auto max-w-[90rem] w-full px-5 lg:px-10">
+        <div className="flex flex-col lg:flex-row gap-14 items-center">
+          <Reveal className="flex-1">
+            <span className="text-sm font-600 uppercase tracking-[0.2em] text-accent">Conquistas</span>
+            <h2 className="mt-3 font-display font-900 text-3xl md:text-4xl lg:text-5xl leading-tight">
+              Resultados que orgulham nossa comunidade
+            </h2>
+            <div className="mt-6 flex gap-4">
+              <Quote className="h-8 w-8 text-accent shrink-0" />
+              <p className="text-primary-foreground/80 leading-relaxed text-justify">
+                No último ano, o Colégio Albert Einstein alcançou o <strong className="text-accent">3º lugar
+                do estado</strong> e o <strong className="text-accent">1º lugar do município</strong>,
+                reafirmando sua posição entre as melhores escolas da região. Uma conquista construída pelo
+                empenho de alunos, professores e famílias.
+              </p>
             </div>
-        </section>;
+            <div className="mt-8 grid grid-cols-2 gap-3 lg:gap-6">
+              {[{
+                icon: Medal,
+                t: '3º lugar do Estado',
+                s: 'Desempenho acadêmico'
+              }, {
+                icon: Trophy,
+                t: '1º lugar do Município',
+                s: 'Referência local'
+              }, {
+                icon: Award,
+                t: 'Entre as melhores',
+                s: 'Reconhecimento constante'
+              }, {
+                icon: Star,
+                t: 'Excelência contínua',
+                s: 'Compromisso diário'
+              }].map(c => (
+                <div key={c.t} className="rounded-2xl lg:rounded-3xl bg-white/5 p-3 lg:p-8 flex flex-col justify-between hover:bg-white/10 transition-colors">
+                  <c.icon className="h-5 w-5 lg:h-10 lg:w-10 text-accent" strokeWidth={1.8} />
+                  <div className="mt-1.5 lg:mt-5">
+                    <div className="font-display font-700 text-xs lg:text-lg leading-snug">{c.t}</div>
+                    <div className="mt-1 lg:mt-2 text-[10px] lg:text-sm text-primary-foreground/60">{c.s}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Reveal>
+          <Reveal delay={0.1} className="relative h-full flex-[1.4] [@media(max-height:820px)]:flex-1">
+            <img src={IMG.trophy} alt="Alunos comemorando conquista acadêmica" loading="lazy" decoding="async" className="rounded-3xl object-cover w-full h-full" />
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  );
 }
 function Estrutura() {
   const cards = [{
