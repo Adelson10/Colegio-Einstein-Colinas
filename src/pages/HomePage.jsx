@@ -232,7 +232,7 @@ function AvatarDot({ src, icon: Icon, style }) {
 }
 function Hero() {
   return (
-    <section id="topo" className="relative overflow-hidden bg-background min-h-[100dvh] flex flex-col">
+    <section id="topo" className="relative overflow-hidden bg-background min-h-0 min-[820px]:min-h-[100dvh] flex flex-col">
       <img
         src={IMG.lion}
         alt=""
@@ -398,7 +398,7 @@ const ROW_LOGOS = [
 ];
 function Marquee() {
   const loop = [...ROW_LOGOS, ...ROW_LOGOS];
-  return <div className="relative bg-transparent mx-auto max-w-[90rem] w-full px-5 lg:px-10 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
+  return <div className="relative bg-transparent mx-auto max-w-[90rem] w-full px-5 lg:px-10 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)] [@media(max-height:820px)]:mb-20">
             <div className="flex items-center whitespace-nowrap animate-marquee w-max gap-8">
                 {loop.map(({ src, ratio }, i) =>
                 <img
@@ -412,7 +412,7 @@ function Marquee() {
         </div>;
 }
 function Historia() {
-  return <section id="historia" className="min-h-screen flex flex-col justify-between py-20 lg:py-28 bg-secondary/50">
+  return <section id="historia" className="min-h-0 min-[820px]:min-h-screen flex flex-col justify-between py-20 lg:py-28 bg-secondary/50">
             <Marquee />
             <div className="mx-auto max-w-[90rem] px-5 lg:px-10 grid lg:grid-cols-2 gap-14 items-center">
                 <Reveal className="relative">
@@ -478,7 +478,7 @@ function MissaoVisaoValores() {
   ];
 
   return (
-    <section id="missao" className="relative overflow-hidden bg-primary text-primary-foreground min-h-[100dvh] flex flex-col pt-20 sm:pt-24 pb-4 sm:pb-6 lg:pb-8">
+    <section id="missao" className="relative overflow-hidden bg-primary text-primary-foreground min-h-0 min-[820px]:min-h-[100dvh] flex flex-col pt-20 sm:pt-24 pb-4 sm:pb-6 lg:pb-8">
       <div className="pointer-events-none absolute -top-32 -right-24 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
       <div className="relative flex-1 min-h-0 flex flex-col justify-center mx-auto max-w-[90rem] w-full px-5 lg:px-10">
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-4 sm:gap-6 lg:gap-8">
@@ -553,7 +553,7 @@ function Equipe() {
   const [active, setActive] = useState(0);
   const current = TEAM[active];
 
-  return <section id="equipe" className="min-h-screen flex flex-col justify-center py-20 lg:py-32 overflow-hidden">
+  return <section id="equipe" className="min-h-0 min-[820px]:min-h-screen flex flex-col justify-center py-20 lg:py-32 overflow-hidden">
             <div className="mx-auto max-w-[90rem] px-5 lg:px-10 w-full">
                 <div className="grid lg:grid-cols-3 gap-12 lg:gap-8 items-center">
                     <Reveal className="lg:min-h-[380px] flex flex-col justify-between text-center lg:text-left items-center lg:items-start">
