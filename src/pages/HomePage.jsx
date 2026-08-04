@@ -21,6 +21,7 @@ const IMG = {
   auditorium: '/auditorio.png',
   lion: '/Lion.png',
   entrada: '/Entrada.png',
+  parque: '/Parque.png',
   alunos: [
     '/alunos/IMG_8975.jpeg',
     '/alunos/IMG_8972.jpeg',
@@ -499,7 +500,7 @@ function MissaoVisaoValores() {
           {cards.map((c, i) =>
             c.photo ? (
               <Reveal key={c.key} className="rounded-2xl lg:rounded-3xl overflow-hidden aspect-[16/10] sm:aspect-auto">
-                <img src={IMG.classroom[1]} alt="Alunos em sala de aula" loading="lazy" decoding="async" className="h-full w-full object-cover" />
+                <img src={IMG.parque} alt="Alunos em sala de aula" loading="lazy" decoding="async" className="h-full w-full object-cover" />
               </Reveal>
             ) : (
               <Reveal
