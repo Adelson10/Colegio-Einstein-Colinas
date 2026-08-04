@@ -401,21 +401,12 @@ function Marquee() {
   return <div className="relative bg-transparent mx-auto max-w-[90rem] w-full px-5 lg:px-10 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
             <div className="flex items-center whitespace-nowrap animate-marquee w-max gap-8">
                 {loop.map(({ src, ratio }, i) =>
-                <span
+                <img
                   key={i}
                   aria-hidden="true"
-                  className="mx-8 inline-block h-8 lg:h-16 shrink-0 bg-primary"
-                  style={{
-                    aspectRatio: ratio,
-                    WebkitMaskImage: `url(/row/${src})`,
-                    maskImage: `url(/row/${src})`,
-                    WebkitMaskSize: 'contain',
-                    maskSize: 'contain',
-                    WebkitMaskRepeat: 'no-repeat',
-                    maskRepeat: 'no-repeat',
-                    WebkitMaskPosition: 'center',
-                    maskPosition: 'center',
-                  }}
+                  src={`/row/${src}`}
+                  className="mx-8 inline-block h-8 lg:h-16 shrink-0 object-contain"
+                  style={{ aspectRatio: ratio }}
                 />)}
             </div>
         </div>;

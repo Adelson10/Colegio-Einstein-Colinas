@@ -1,13 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Star } from 'lucide-react';
+import { Sparkles } from 'lucide-react';
 
 const LOGO = '/logo.png';
 
 const HIGHLIGHTS = ['35+ anos de história', '1º lugar no município', '3º lugar no estado', 'Parceria UNOPAR desde 2004'];
-
-const CHIPS = ['Educação Infantil', 'Ensino Fundamental', 'Ensino Médio', 'Parceria UNOPAR', 'Excelência desde 1989'];
-const CHIPS_LOOP = [...CHIPS, ...CHIPS];
 
 function LoadingScreen({ ready, onFinish }) {
   const [percent, setPercent] = useState(0);
@@ -63,9 +60,13 @@ function LoadingScreen({ ready, onFinish }) {
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: 'easeOut' }}
-          className="inline-flex items-center gap-2 rounded-full border border-accent/40 bg-accent/15 px-4 py-1.5 text-xs uppercase tracking-[0.2em] text-accent"
+          className="inline-flex items-center gap-2 rounded-full border border-white/60 bg-white/70 backdrop-blur-md pl-2 pr-4 py-1.5 text-xs font-600 uppercase tracking-[0.2em] text-primary shadow-[0_8px_24px_-10px_rgba(15,23,42,0.35)]"
         >
-          <Sparkles className="h-3.5 w-3.5" /> Excelência desde 1989
+          <span className="relative grid place-items-center h-5 w-5 rounded-full bg-accent text-white shrink-0">
+            <span className="absolute inset-0 rounded-full bg-accent animate-ping opacity-50" />
+            <Sparkles className="relative h-3 w-3" />
+          </span>
+          Excelência desde 1989
         </motion.span>
 
         <div className="relative grid place-items-center">
@@ -128,19 +129,6 @@ function LoadingScreen({ ready, onFinish }) {
             {Math.round(percent)}%
           </span>
         </motion.div>
-      </div>
-
-      <div className="pointer-events-none absolute bottom-20 inset-x-0 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)]">
-        <div className="flex whitespace-nowrap animate-marquee w-max">
-          {CHIPS_LOOP.map((c, i) => (
-            <span
-              key={i}
-              className="mx-2 inline-flex items-center gap-1.5 rounded-full border border-primary/10 bg-white/80 px-3.5 py-1.5 text-[11px] font-500 uppercase tracking-wider text-primary/60"
-            >
-              <Star className="h-3 w-3 text-accent fill-accent" /> {c}
-            </span>
-          ))}
-        </div>
       </div>
     </motion.div>
   );
