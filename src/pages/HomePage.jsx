@@ -398,7 +398,7 @@ const STATS = [{
 }];
 function Stats() {
   return <section className="bg-background py-16 lg:py-20">
-            <div className="mx-auto max-w-[72rem] px-5 lg:px-10 grid grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="mx-auto max-w-[90rem] px-5 lg:px-10 grid grid-cols-2 lg:grid-cols-4 gap-6">
                 {STATS.map((s, i) => <Reveal key={s.label} delay={i * 0.08} className="text-center rounded-3xl border border-border bg-card p-7 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                         <s.icon className="mx-auto h-8 w-8 text-accent" strokeWidth={1.8} />
                         <div className="mt-4 font-display font-900 text-4xl text-primary">{s.value}</div>
@@ -409,7 +409,7 @@ function Stats() {
 }
 function Historia() {
   return <section id="historia" className="py-20 lg:py-28 bg-secondary/50">
-            <div className="mx-auto max-w-[72rem] px-5 lg:px-10 grid lg:grid-cols-2 gap-14 items-center">
+            <div className="mx-auto max-w-[90rem] px-5 lg:px-10 grid lg:grid-cols-2 gap-14 items-center">
                 <Reveal className="relative">
                     <div className="absolute -top-5 -left-5 h-24 w-24 rounded-2xl bg-accent/20 -z-0" />
                     <ImageCarousel images={IMG.classroom} alt="Sala de aula do colégio" className="relative rounded-3xl shadow-xl aspect-[4/3] w-full" />
@@ -477,7 +477,7 @@ function MissaoVisaoValores() {
   return (
     <section id="missao" className="relative overflow-hidden bg-primary text-primary-foreground py-20 lg:py-28">
       <div className="pointer-events-none absolute -top-32 -right-24 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
-      <div className="relative mx-auto max-w-[72rem] px-5 lg:px-10">
+      <div className="relative mx-auto max-w-[90rem] px-5 lg:px-10">
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
           <Reveal className="max-w-xl">
             <span className="text-sm font-600 uppercase tracking-[0.2em] text-accent">Nossos pilares</span>
@@ -546,7 +546,7 @@ const TEAM = [{
 }];
 function Equipe() {
   return <section id="equipe" className="py-20 lg:py-28">
-            <div className="mx-auto max-w-[72rem] px-5 lg:px-10">
+            <div className="mx-auto max-w-[90rem] px-5 lg:px-10">
                 <Reveal className="text-center max-w-2xl mx-auto">
                     <span className="text-sm font-600 uppercase tracking-[0.2em] text-accent">Direção</span>
                     <h2 className="mt-3 font-display font-900 text-3xl lg:text-5xl text-primary">
@@ -573,7 +573,7 @@ function Equipe() {
 }
 function Conquistas() {
   return <section id="conquistas" className="py-20 lg:py-28 bg-primary text-primary-foreground overflow-hidden">
-            <div className="mx-auto max-w-[72rem] px-5 lg:px-10 grid lg:grid-cols-2 gap-14 items-center">
+            <div className="mx-auto max-w-[90rem] px-5 lg:px-10 grid lg:grid-cols-2 gap-14 items-center">
                 <Reveal>
                     <span className="text-sm font-600 uppercase tracking-[0.2em] text-accent">Conquistas</span>
                     <h2 className="mt-3 font-display font-900 text-3xl lg:text-5xl leading-tight">
@@ -651,7 +651,7 @@ function Estrutura() {
     s: 'Espaço para eventos, apresentações e celebrações que reúnem toda a comunidade escolar.'
   }];
   return <section id="estrutura" className="py-20 lg:py-28">
-            <div className="mx-auto max-w-[72rem] px-5 lg:px-10">
+            <div className="mx-auto max-w-[90rem] px-5 lg:px-10">
                 <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6">
                     <Reveal className="max-w-xl">
                         <span className="text-sm font-600 uppercase tracking-[0.2em] text-accent">Estrutura</span>
@@ -701,7 +701,7 @@ function Estrutura() {
 
 function Testimonials() {
   return <section className="py-20 lg:py-28 bg-secondary/50">
-            <div className="mx-auto max-w-[72rem] px-5 lg:px-10 grid lg:grid-cols-2 gap-12 items-center">
+            <div className="mx-auto max-w-[90rem] px-5 lg:px-10 grid lg:grid-cols-2 gap-12 items-center">
                 <Reveal>
                     <span className="text-sm font-600 uppercase tracking-[0.2em] text-accent">Depoimentos</span>
                     <h2 className="mt-3 font-display font-900 text-3xl lg:text-5xl text-primary leading-tight">
@@ -765,7 +765,7 @@ const ETAPAS = [{
 }];
 function Etapas() {
   return <section className="py-20 lg:py-28 bg-primary text-primary-foreground">
-            <div className="mx-auto max-w-[64rem] px-5 lg:px-10 text-center">
+            <div className="mx-auto max-w-[90rem] px-5 lg:px-10 text-center">
                 <Reveal>
                     <span className="text-sm font-600 uppercase tracking-[0.2em] text-accent">Matrículas abertas</span>
                     <h2 className="mt-3 font-display font-900 text-3xl lg:text-5xl leading-tight">
@@ -798,7 +798,7 @@ function Etapas() {
 
 function Contato() {
   return <section id="contato" className="py-20 lg:py-28 bg-secondary/50">
-            <div className="mx-auto max-w-[72rem] px-5 lg:px-10 grid lg:grid-cols-2 gap-14">
+            <div className="mx-auto max-w-[90rem] px-5 lg:px-10 grid lg:grid-cols-2 gap-14">
                 <Reveal>
                     <span className="text-sm font-600 uppercase tracking-[0.2em] text-accent">Contato</span>
                     <h2 className="mt-3 font-display font-900 text-3xl lg:text-5xl text-primary leading-tight">
@@ -886,7 +886,7 @@ function ContactFields() {
 }
 function CTAFinal() {
   return <section className="py-20 lg:py-28 bg-background">
-            <div className="mx-auto max-w-[72rem] px-5 lg:px-10 grid lg:grid-cols-2 gap-14 items-center">
+            <div className="mx-auto max-w-[90rem] px-5 lg:px-10 grid lg:grid-cols-2 gap-14 items-center">
                 <Reveal>
                     <h2 className="font-display font-900 text-3xl lg:text-5xl text-primary leading-tight">
                         Venha construir o futuro dos seus filhos com a gente.
