@@ -193,27 +193,28 @@ function Navbar() {
       behavior: 'smooth'
     });
   };
-  return <header className={`${scrolled ? 'fixed' : 'absolute'} top-0 inset-x-0 z-50 transition-colors duration-300 ${overDark ? 'bg-transparent border-b border-transparent' : scrolled ? 'bg-background border-b border-border' : 'bg-transparent border-b border-transparent'}`}>
+  const effectiveOverDark = overDark && !open;
+  return <header className={`${scrolled || open ? 'fixed' : 'absolute'} top-0 inset-x-0 z-50 transition-colors duration-300 ${effectiveOverDark ? 'bg-transparent border-b border-transparent' : scrolled || open ? 'bg-background border-b border-border' : 'bg-transparent border-b border-transparent'}`}>
             <nav className="mx-auto max-w-[90rem] px-5 lg:px-10 h-20 flex items-center justify-between">
                 <button onClick={() => go('topo')} className="flex items-center gap-3">
                     <span className="grid place-items-center h-12 w-12 rounded-full bg-white border border-border overflow-hidden">
                         <img src={LOGO} alt="Colégio Albert Einstein" className="h-full w-full object-contain p-0.5" />
                     </span>
                     <span className="leading-tight text-left hidden sm:block">
-                       <span className={`block font-display font-900 text-lg tracking-tight transition-colors duration-300 ${overDark ? 'text-white' : 'text-primary'}`}>COLÉGIO EINSTEIN</span>
+                       <span className={`block font-display font-900 text-lg tracking-tight transition-colors duration-300 ${effectiveOverDark ? 'text-white' : 'text-primary'}`}>COLÉGIO EINSTEIN</span>
                         <span className="block text-[11px] uppercase tracking-[0.22em] text-accent">COLINAS DO TOCANTINS</span>
                     </span>
                 </button>
                 <div className="hidden lg:flex items-center gap-8">
-                    {NAV.map(n => <button key={n.id} onClick={() => go(n.id)} className={`text-sm font-500 transition-colors ${overDark ? 'text-white/80 hover:text-white' : 'text-foreground/70 hover:text-primary'}`}>
+                    {NAV.map(n => <button key={n.id} onClick={() => go(n.id)} className={`text-sm font-500 transition-colors ${effectiveOverDark ? 'text-white/80 hover:text-white' : 'text-foreground/70 hover:text-primary'}`}>
                             {n.label}
                         </button>)}
                 </div>
                 <div className="hidden lg:flex items-center gap-3">
-                    <PillButton variant={overDark ? 'ghost' : 'outline'} onClick={() => go('contato')}>Fale conosco</PillButton>
-                    <PillButton href={WHATSAPP_URL} variant={overDark ? 'invert' : 'solid'}>Matrículas</PillButton>
+                    <PillButton variant={effectiveOverDark ? 'ghost' : 'outline'} onClick={() => go('contato')}>Fale conosco</PillButton>
+                    <PillButton href={WHATSAPP_URL} variant={effectiveOverDark ? 'invert' : 'solid'}>Matrículas</PillButton>
                 </div>
-                <button className={`lg:hidden transition-colors duration-300 ${overDark ? 'text-white' : 'text-primary'}`} onClick={() => setOpen(!open)} aria-label="Menu">
+                <button className={`lg:hidden transition-colors duration-300 ${effectiveOverDark ? 'text-white' : 'text-primary'}`} onClick={() => setOpen(!open)} aria-label="Menu">
                     {open ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
                 </button>
             </nav>
@@ -281,18 +282,9 @@ function Hero() {
             </div>
 
             <div className="text-center lg:text-left h-full flex-col flex justify-center gap-8">
-              <motion.span
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="lg:hidden inline-flex items-center gap-2 rounded-full border border-accent/30 bg-accent/10 px-4 py-1.5 text-xs uppercase tracking-[0.2em] text-primary mb-5"
-              >
-                <Sparkles className="h-3.5 w-3.5 text-accent" /> Excelência desde 1989
-              </motion.span>
-
               <motion.div
                 initial={{ opacity: 0, y: 26 }}
-                animate={{ opacity: 1, y: -40 }}
+                animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.1 }}
               >
                 <h1 className="font-display font-900 leading-[1.05] tracking-tight via-70% text-4xl sm:text-5xl md:text-6xl lg:text-7xl bg-gradient-to-b from-sky-400 via-primary to-primary/80 bg-clip-text text-transparent">
@@ -312,7 +304,7 @@ function Hero() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.25 }}
-                className="text-muted-foreground max-w-lg mx-auto lg:ml-0 lg:mr-32 text-justify text-base sm:text-lg"
+                className="text-muted-foreground max-w-lg mx-auto lg:ml-0 lg:mr-32 text-balance text-base sm:text-lg"
               >
                 Há mais de três décadas, o Colégio Albert Einstein constrói trajetórias de aprendizado com dedicação,
                 valores e resultados que se destacam entre as melhores escolas da região.
@@ -398,14 +390,14 @@ const ROW_LOGOS = [
 ];
 function Marquee() {
   const loop = [...ROW_LOGOS, ...ROW_LOGOS];
-  return <div className="relative bg-transparent mx-auto max-w-[90rem] w-full px-5 lg:px-10 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)] [@media(max-height:820px)]:mb-20">
+  return <div className="relative bg-transparent mx-auto max-w-[90rem] w-full px-5 lg:px-10 py-6 sm:py-4 mb-8 sm:mb-0 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)] [-webkit-mask-image:linear-gradient(to_right,transparent,black_15%,black_85%,transparent)] [@media(max-height:820px)]:mb-20">
             <div className="flex items-center whitespace-nowrap animate-marquee w-max gap-8">
                 {loop.map(({ src, ratio }, i) =>
                 <img
                   key={i}
                   aria-hidden="true"
                   src={`/row/${src}`}
-                  className="mx-8 inline-block h-7 sm:h-10 md:h-12 lg:h-16 shrink-0 object-contain"
+                  className="mx-8 inline-block h-10 sm:h-10 md:h-12 lg:h-16 shrink-0 object-contain"
                   style={{ aspectRatio: ratio }}
                 />)}
             </div>
@@ -428,7 +420,7 @@ function Historia() {
                     <h2 className="mt-3 font-display font-900 text-3xl md:text-4xl lg:text-5xl text-primary leading-tight">
                         Uma trajetória construída com propósito
                     </h2>
-                    <p className="mt-5 text-muted-foreground leading-relaxed text-justify ">
+                    <p className="mt-5 text-muted-foreground leading-relaxed text-balance">
                         O Colégio Albert Einstein foi fundado em <strong className="text-foreground">1989</strong> pela
                         educadora <strong className="text-foreground">Suelena Alves Carvalho Torres</strong>, com o sonho
                         de oferecer um ensino de qualidade que unisse conhecimento, valores e cuidado com cada estudante.
@@ -500,32 +492,32 @@ function MissaoVisaoValores() {
           </Reveal>
         </div>
 
-        <div className="mt-6 sm:mt-8 lg:mt-14 grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-6">
+        <div className="mt-6 sm:mt-8 lg:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-6">
           {cards.map((c, i) =>
             c.photo ? (
-              <Reveal key={c.key} className="rounded-2xl lg:rounded-3xl overflow-hidden">
+              <Reveal key={c.key} className="rounded-2xl lg:rounded-3xl overflow-hidden aspect-[16/10] sm:aspect-auto">
                 <img src={IMG.classroom[1]} alt="Alunos em sala de aula" loading="lazy" decoding="async" className="h-full w-full object-cover" />
               </Reveal>
             ) : (
               <Reveal
                 key={c.key}
                 delay={i * 0.1}
-                className={`rounded-2xl lg:rounded-3xl p-3 lg:p-8 ${c.highlight ? 'bg-white' : 'bg-white/5'} flex flex-col justify-between`}
+                className={`rounded-2xl lg:rounded-3xl p-5 lg:p-8 ${c.highlight ? 'bg-white' : 'bg-white/5'} flex flex-col justify-between`}
               >
-                <c.icon className={`h-5 w-5 lg:h-10 lg:w-10 ${c.highlight ? 'text-accent' : 'text-white'}`}  strokeWidth={1.8} />
-                <div className="flex flex-col gap-1 lg:gap-1.5 min-h-0">
-                  <h3 className={`mt-1.5 lg:mt-5 font-display font-700 text-xs lg:text-2xl leading-snug ${c.highlight ? 'text-primary' : ''}`}>{c.title}</h3>
+                <c.icon className={`h-6 w-6 lg:h-10 lg:w-10 ${c.highlight ? 'text-accent' : 'text-white'}`}  strokeWidth={1.8} />
+                <div className="flex flex-col gap-1.5 lg:gap-1.5 min-h-0">
+                  <h3 className={`mt-2 lg:mt-5 font-display font-700 text-base lg:text-2xl leading-snug ${c.highlight ? 'text-primary' : ''}`}>{c.title}</h3>
                   {c.highlight ? (
-                    <ul className="mt-1 lg:mt-3 space-y-0.5 lg:space-y-2 overflow-hidden">
+                    <ul className="mt-1 lg:mt-3 space-y-1.5 lg:space-y-2 overflow-hidden">
                       {VALORES.map(v => (
-                        <li key={v} className="flex items-start gap-1 lg:gap-2.5 text-[9px] lg:text-sm text-foreground text-balance leading-snug">
-                          <CheckCircle2 className="hidden lg:block h-4 w-4 text-accent shrink-0 mt-0.5" />
+                        <li key={v} className="flex items-start gap-2 lg:gap-2.5 text-sm text-foreground text-balance leading-snug">
+                          <CheckCircle2 className="h-4 w-4 text-accent shrink-0 mt-0.5" />
                           {v}
                         </li>
                       ))}
                     </ul>
                   ) : (
-                    <p className="mt-1 lg:mt-3 text-[10px] lg:text-sm text-primary-foreground/70 leading-snug lg:leading-relaxed text-balance line-clamp-4 lg:line-clamp-none">{c.text}</p>
+                    <p className="mt-1 lg:mt-3 text-sm text-primary-foreground/70 leading-relaxed text-balance">{c.text}</p>
                   )}
                 </div>
               </Reveal>
@@ -613,8 +605,8 @@ function Conquistas() {
               Resultados que orgulham nossa comunidade
             </h2>
             <div className="mt-6 flex gap-4">
-              <Quote className="h-8 w-8 text-accent shrink-0" />
-              <p className="text-primary-foreground/80 leading-relaxed text-justify">
+              <Quote className="h-8 w-8 text-accent shrink-0" fill="currentColor" />
+              <p className="text-primary-foreground/80 leading-relaxed text-balance">
                 No último ano, o Colégio Albert Einstein alcançou o <strong className="text-accent">3º lugar
                 do estado</strong> e o <strong className="text-accent">1º lugar do município</strong>,
                 reafirmando sua posição entre as melhores escolas da região. Uma conquista construída pelo
