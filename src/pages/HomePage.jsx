@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { GraduationCap, Award, Trophy, Users, BookOpen, Star, Menu, X, MapPin, Phone, Mail, Clock, CheckCircle2, Medal, Building2, Sparkles, Target, Eye, HeartHandshake, ArrowUpRight, ArrowUp, ArrowDown, Quote, Landmark } from 'lucide-react';
+import { GraduationCap, Award, Trophy, Users, BookOpen, Star, Menu, X, MapPin, Phone, Mail, Clock, CheckCircle2, Medal, Building2, Sparkles, Target, Eye, HeartHandshake, ArrowUpRight, ArrowUp, ArrowDown, Quote, Landmark, Sigma, Bot } from 'lucide-react';
 import LogoIcon from '../../public/logo.jsx';
 const LOGO = '/logo.png';
 const IMG = {
@@ -49,6 +49,23 @@ const IMG = {
     fundamental2: '/etapas/Fundamental II-frente.png',
     medio: '/etapas/medio-frente.png'
   },
+  olimpiadas: {
+    portugues: [
+      '/olimpiadas/portugues1.png',
+      '/olimpiadas/portugues2.png'
+    ],
+    matematica: [
+      '/olimpiadas/matematica1.png',
+      '/olimpiadas/matematica2.png'
+    ],
+    esportes: [
+      '/olimpiadas/esportes1.png',
+      '/olimpiadas/esportes2.png'
+    ],
+    robotica: [
+      '/olimpiadas/robotica1.png',
+    ]
+  },
 };
 const NAV = [{
   id: 'historia',
@@ -69,8 +86,8 @@ const NAV = [{
   id: 'etapas',
   label: 'Etapas'
 }, {
-  id: 'contato',
-  label: 'Contato'
+  id: 'medalhas',
+  label: 'Medalhas'
 }];
 const WHATSAPP_URL = 'https://wa.me/5563981228732?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20as%20matr%C3%ADculas';
 const fade = {
@@ -242,7 +259,7 @@ function Navbar() {
                         </button>)}
                 </div>
                 <div className="hidden lg:flex items-center gap-3">
-                    <PillButton variant={effectiveOverDark ? 'ghost' : 'outline'} onClick={() => go('contato')}>Fale conosco</PillButton>
+                    <PillButton variant={effectiveOverDark ? 'ghost' : 'outline'} onClick={() => go('medalhas')}>Fale conosco</PillButton>
                     <PillButton href={WHATSAPP_URL} variant={effectiveOverDark ? 'invert' : 'solid'}>Matrículas</PillButton>
                 </div>
                 <button className={`lg:hidden transition-colors duration-300 ${effectiveOverDark ? 'text-white' : 'text-primary'}`} onClick={() => setOpen(!open)} aria-label="Menu">
@@ -514,7 +531,7 @@ function MissaoVisaoValores() {
               Missão, visão e valores que orientam cada decisão pedagógica e cada relação construída dentro do Colégio Albert Einstein.
             </p>
             <div className="mt-2 sm:mt-5">
-              <PillButton variant="accent" onClick={() => document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' })}>
+              <PillButton variant="accent" onClick={() => document.getElementById('medalhas')?.scrollIntoView({ behavior: 'smooth' })}>
                 Fale conosco
               </PillButton>
             </div>
@@ -634,12 +651,13 @@ function Conquistas() {
               Resultados que orgulham nossa comunidade
             </h2>
             <div className="mt-6 flex gap-4">
-              <Quote className="h-8 w-8 text-accent shrink-0" fill="currentColor" />
+              <Quote className="h-8 w-8 text-accent shrink-0 rotate-180" fill="currentColor" />
               <p className="text-primary-foreground/80 leading-relaxed text-balance">
                 No último ano, o Colégio Albert Einstein alcançou o <strong className="text-accent">3º lugar
                 do estado</strong> e o <strong className="text-accent">1º lugar do município</strong>,
                 reafirmando sua posição entre as melhores escolas da região. Uma conquista construída pelo
                 empenho de alunos, professores e famílias.
+                <Quote className="inline-block h-8 w-8 ml-1 mb-1 text-accent" fill="currentColor" />
               </p>
             </div>
             <div className="mt-8 grid grid-cols-2 gap-3 lg:gap-6">
@@ -724,7 +742,7 @@ function Estrutura() {
                             Espaços pensados para o aprendizado prático, a convivência e o bem-estar de cada estudante.
                         </p>
                         <div className="mt-4">
-                            <PillButton variant="outline" onClick={() => document.getElementById('contato')?.scrollIntoView({
+                            <PillButton variant="outline" onClick={() => document.getElementById('medalhas')?.scrollIntoView({
                 behavior: 'smooth'
               })}>
                                 Agende uma visita
@@ -746,7 +764,7 @@ function Estrutura() {
                                 <p className="mt-2 text-sm text-muted-foreground">{c.s}</p>
                                 <div className="mt-5 pt-4 border-t border-border flex items-center justify-between">
                                     <span className="text-sm font-600 text-primary">Conheça o espaço</span>
-                                    <PillButton variant="outline" className="!py-1 !pl-4 !pr-1 text-xs" onClick={() => document.getElementById('contato')?.scrollIntoView({
+                                    <PillButton variant="outline" className="!py-1 !pl-4 !pr-1 text-xs" onClick={() => document.getElementById('medalhas')?.scrollIntoView({
                         behavior: 'smooth'
                       })}>
                                         Visitar
@@ -801,9 +819,10 @@ function Testimonials() {
                             </button>
                         </div>
                         <div>
-                            <Quote className="h-6 w-6 text-accent/60" />
+                            <Quote className="h-6 w-6 text-accent/60 rotate-180" />
                             <p key={current.text} className="mt-2 text-foreground leading-relaxed">
                                 {current.text}
+                                <Quote className="inline-block h-4 w-4 ml-1 mb-1 text-accent/60 " />
                             </p>
                             <div className="mt-4 text-sm font-600 text-primary">{current.name}</div>
                         </div>
@@ -873,7 +892,7 @@ function Etapas() {
         <Reveal>
           <span className="text-xs sm:text-sm font-600 uppercase tracking-[0.2em] text-accent">Matrículas abertas</span>
           <h2 className="mt-1.5 sm:mt-3 font-display font-900 text-xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight">
-            Escolha a etapa ideal para o seu filho.
+            Mais do que ensinar, formamos futuros.
           </h2>
         </Reveal>
         <div className="mt-16 sm:mt-20 lg:mt-[10rem] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-x-3 gap-y-16 sm:gap-x-6 sm:gap-y-14 lg:gap-x-8 lg:gap-y-16">
@@ -904,93 +923,69 @@ function Etapas() {
   );
 }
 
-function Contato() {
-  return <section id="contato" className="py-20 lg:py-28 bg-secondary/50">
-            <div className="mx-auto max-w-[90rem] px-5 lg:px-10 grid lg:grid-cols-2 gap-14">
-                <Reveal>
-                    <span className="text-sm font-600 uppercase tracking-[0.2em] text-accent">Contato</span>
-                    <h2 className="mt-3 font-display font-900 text-3xl md:text-4xl lg:text-5xl text-primary leading-tight">
-                        Venha conhecer o Colégio Albert Einstein
-                    </h2>
-                    <p className="mt-4 text-muted-foreground">
-                        Estamos à disposição para tirar suas dúvidas e apresentar nossa proposta pedagógica.
-                        Entre em contato pelos canais abaixo.
-                    </p>
-                    <div className="mt-8 space-y-5">
-                        {[{
-            icon: Phone,
-            t: 'Telefone',
-            s: '(63) 98122-8732'
-          }, {
-            icon: Mail,
-            t: 'E-mail',
-            s: 'seceinsteincolinastocantins@outlook.com'
-          }, {
-            icon: MapPin,
-            t: 'Endereço',
-            s: 'Rua Raul do Espírito Santo, 1074'
-          }].map(c => <div key={c.t} className="flex items-start gap-4">
-                                <span className="grid place-items-center h-11 w-11 rounded-xl bg-accent/15 text-accent shrink-0">
-                                    <c.icon className="h-5 w-5" />
-                                </span>
-                                <div>
-                                    <div className="font-600 text-foreground">{c.t}</div>
-                                    <div className="text-sm text-muted-foreground">{c.s}</div>
+const OLIMPIADAS = [{
+  key: 'portugues',
+  label: 'Português',
+  s: 'OPA, BEABÁ',
+  icon: BookOpen,
+  images: IMG.olimpiadas.portugues
+}, {
+  key: 'matematica',
+  label: 'Matemática',
+  s: 'Canguru, OBMEP, OBMEP Mirim',
+  icon: Sigma,
+  images: IMG.olimpiadas.matematica
+}, {
+  key: 'robotica',
+  label: 'Robótica',
+  s: 'OBR',
+  icon: Bot,
+  images: IMG.robotica
+}, {
+  key: 'esportes',
+  label: 'Esportes',
+  s: '',
+  icon: Trophy,
+  images: IMG.olimpiadas.esportes
+}];
+function Medalhas() {
+  const [active, setActive] = useState(OLIMPIADAS[0].key);
+  const current = OLIMPIADAS.find(o => o.key === active);
+  return (
+    <section id="medalhas" className="relative overflow-hidden bg-background text-foreground min-h-0 min-[820px]:min-h-[100dvh] flex flex-col pt-20 sm:pt-24 pb-4 sm:pb-6 lg:pb-8">
+      <div className="pointer-events-none absolute -top-32 -right-24 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
+      <div className="relative flex-1 min-h-0 flex flex-col justify-center mx-auto max-w-[90rem] w-full px-5 lg:px-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-stretch">
+          <Reveal>
+            <span className="text-sm font-600 uppercase tracking-[0.2em] text-accent">Medalhas</span>
+            <h2 className="mt-3 font-display font-900 text-3xl md:text-4xl lg:text-5xl leading-tight text-primary">
+              Conquistas que vão além da sala de aula
+            </h2>
+            <div className="mt-6 flex gap-4">
+              <Quote className="h-8 w-8 text-accent shrink-0 rotate-180" fill="currentColor" />
+              <p className="text-muted-foreground leading-relaxed text-balance">
+                Nossos alunos se destacam tanto nas principais olimpíadas acadêmicas quanto nas
+                competições esportivas. Escolha uma área abaixo para conhecer um pouco dessas conquistas.
+                <Quote className="inline-block h-8 w-8 ml-1 mb-1 text-accent" fill="currentColor" />
+              </p>
+            </div>
+            <div className="mt-8 grid grid-cols-2 gap-3 lg:gap-6">
+              {OLIMPIADAS.map(o => <button key={o.key} onClick={() => setActive(o.key)} className={`rounded-2xl lg:rounded-3xl p-3 lg:p-8 flex flex-col items-start justify-between text-left transition-colors ${active === o.key ? 'bg-primary text-primary-foreground' : 'bg-secondary/50 text-foreground hover:bg-secondary'}`}>
+                                <o.icon className="h-5 w-5 lg:h-10 lg:w-10 text-accent" strokeWidth={1.8} />
+                                <div className="mt-1.5 lg:mt-5">
+                                    <div className="font-display font-700 text-xs lg:text-lg leading-snug">{o.label}</div>
+                                    <div className={`mt-1 lg:mt-2 text-[10px] lg:text-sm leading-snug line-clamp-2 min-h-[2.4em] ${active === o.key ? 'text-primary-foreground/70' : 'text-muted-foreground'}`}>{o.s}</div>
                                 </div>
-                            </div>)}
-                        <div className="flex items-start gap-4">
-                            <span className="grid place-items-center h-11 w-11 rounded-xl bg-accent/15 text-accent shrink-0">
-                                <Clock className="h-5 w-5" />
-                            </span>
-                            <div>
-                                <div className="font-600 text-foreground">Horário de atendimento</div>
-                                <div className="text-sm text-muted-foreground space-y-0.5 mt-1">
-                                    <div>Segunda a sexta-feira: 07:00-17:00</div>
-
-                                    <div>Sábado: Fechado</div>
-                                    <div>Domingo: Fechado</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </Reveal>
-                <Reveal delay={0.1}>
-                    <div className="rounded-3xl border border-border bg-card p-7">
-                        <ContactFields />
-                    </div>
-                </Reveal>
+                            </button>)}
             </div>
-        </section>;
-}
-function ContactFields() {
-  const [sent, setSent] = useState(false);
-  if (sent) {
-    return <div className="text-center py-14">
-                <CheckCircle2 className="mx-auto h-14 w-14 text-accent" />
-                <h3 className="mt-4 font-display font-700 text-xl text-primary">Mensagem enviada!</h3>
-                <p className="mt-2 text-sm text-muted-foreground">Agradecemos o contato. Retornaremos em breve.</p>
-            </div>;
-  }
-  return <form onSubmit={e => {
-    e.preventDefault();
-    setSent(true);
-  }} className="space-y-4">
-            <div className="grid gap-2">
-                <label className="text-sm font-500 text-foreground">Nome</label>
-                <input required className="rounded-2xl border border-input bg-background px-4 py-2.5 outline-none focus:ring-2 focus:ring-ring/40" placeholder="Seu nome" />
-            </div>
-            <div className="grid gap-2">
-                <label className="text-sm font-500 text-foreground">E-mail</label>
-                <input required type="email" className="rounded-2xl border border-input bg-background px-4 py-2.5 outline-none focus:ring-2 focus:ring-ring/40" placeholder="voce@email.com" />
-            </div>
-            <div className="grid gap-2">
-                <label className="text-sm font-500 text-foreground">Mensagem</label>
-                <textarea required rows={4} className="rounded-2xl border border-input bg-background px-4 py-2.5 outline-none focus:ring-2 focus:ring-ring/40 resize-none" placeholder="Como podemos ajudar?" />
-            </div>
-            <PillButton type="submit" variant="solid" className="w-full justify-center">
-                Enviar mensagem
-            </PillButton>
-        </form>;
+          </Reveal>
+          <Reveal delay={0.1} className="relative h-full aspect-[9/10] mx-auto lg:mx-0 rounded-3xl overflow-hidden">
+            <ImageCarousel key={active} images={current.images} alt={`Olimpíada de ${current.label}`} className="w-full h-full" />
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  );
 }
 function CTAFinal() {
   return <section className="py-20 lg:py-28 bg-background">
@@ -1044,11 +1039,27 @@ function Footer() {
                     </div>
                     <div>
                         <h4 className="font-600 text-sm uppercase tracking-wider text-accent">Contato</h4>
-                        <ul className="mt-4 space-y-2 text-sm text-primary-foreground/75">
-                            <li>contato@colegioalberteinstein.com.br</li>
-                            <li>(63) 99991-9976</li>
-                            <li className="pt-2 border-t border-white/10 mt-2">Seg a Sex: 07:00–17:00</li>
-                            <li>Sábado e Domingo: Fechado</li>
+                        <ul className="mt-4 space-y-3 text-sm text-primary-foreground/75">
+                            <li className="flex items-start gap-2">
+                                <Mail className="h-4 w-4 mt-0.5 text-accent shrink-0" />
+                                <span>seceinsteincolinastocantins@outlook.com</span>
+                            </li>
+                            <li className="flex items-start gap-2">
+                                <Phone className="h-4 w-4 mt-0.5 text-accent shrink-0" />
+                                <span>(63) 98122-8732</span>
+                            </li>
+                            <li className="flex items-start gap-2">
+                                <MapPin className="h-4 w-4 mt-0.5 text-accent shrink-0" />
+                                <span>Rua Raul do Espírito Santo, 1074</span>
+                            </li>
+                            <li className="flex items-start gap-2 pt-3 border-t border-white/10 mt-1">
+                                <Clock className="h-4 w-4 mt-0.5 text-accent shrink-0" />
+                                <span>
+                                    Segunda a sexta-feira: 07:00-17:00<br />
+                                    Sábado: Fechado<br />
+                                    Domingo: Fechado
+                                </span>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -1057,7 +1068,7 @@ function Footer() {
                     <p>Parceria pedagógica UNOPAR desde 2004.</p>
                 </div>
             </div>
-            <img src="/leaoazul.png" alt="" aria-hidden="true" className="pointer-events-none select-none absolute right-0 top-0 h-full w-auto object-contain opacity-[0.18] mix-blend-multiply translate-x-1/4 scale-125" />
+            <img src="/leaoazul.png" alt="" aria-hidden="true" className="pointer-events-none select-none absolute right-0 top-0 h-full w-auto object-contain opacity-[0.35] mix-blend-multiply translate-x-1/4 scale-125" />
             <span className="pointer-events-none absolute -bottom-[6vw] inset-x-0 text-center font-display font-900 text-[13vw] leading-none select-none whitespace-nowrap bg-gradient-to-b from-white/25 via-white/8 to-transparent bg-clip-text text-transparent">
                 EINSTEIN
             </span>
@@ -1082,7 +1093,7 @@ const HomePage = () => {
                 <Conquistas />
                 <Testimonials />
                 <Etapas />
-                <Contato />
+                <Medalhas />
                 <CTAFinal />
             </main>
             <Footer />
