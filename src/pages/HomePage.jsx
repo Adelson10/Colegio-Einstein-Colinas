@@ -10,7 +10,13 @@ const IMG = {
   classroom: [
     '/sala.png',
     '/sala-2.png',
-    '/sala-3.png'
+    '/sala-3.png',
+    '/sala-4.png',
+    '/sala-5.png',
+    '/sala-6.png',
+    '/sala-7.png',
+    '/sala-8.png'
+
   ],
   robotica: [
     '/projetos/robotica1.png',
