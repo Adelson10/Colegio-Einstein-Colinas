@@ -1057,9 +1057,11 @@ function Footer() {
                     <p>Parceria pedagógica UNOPAR desde 2004.</p>
                 </div>
             </div>
+            <img src="/leaoazul.png" alt="" aria-hidden="true" className="pointer-events-none select-none absolute right-0 top-0 h-full w-auto object-contain opacity-10 translate-x-1/4 scale-125" />
             <span className="pointer-events-none absolute -bottom-[6vw] inset-x-0 text-center font-display font-900 text-[13vw] leading-none select-none whitespace-nowrap bg-gradient-to-b from-white/25 via-white/8 to-transparent bg-clip-text text-transparent">
                 EINSTEIN
             </span>
+            <img src={LOGO} alt="" aria-hidden="true" className="pointer-events-none select-none absolute z-10 -bottom-[1vw] inset-x-0 mx-auto h-[10vw] w-[10vw] object-contain brightness-0 invert opacity-25 [mask-image:linear-gradient(to_bottom,white,white_50%,transparent_100%)]" />
         </footer>;
 }
 function WhatsAppFloat() {
