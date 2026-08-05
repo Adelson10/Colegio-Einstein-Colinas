@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { GraduationCap, Award, Trophy, Users, BookOpen, Star, Menu, X, MapPin, Phone, Mail, Clock, CheckCircle2, Medal, Building2, Sparkles, Target, Eye, HeartHandshake, ArrowUpRight, ArrowUp, ArrowDown, Quote, Landmark, Sigma, Bot } from 'lucide-react';
+import { GraduationCap, Award, Trophy, Users, BookOpen, Star, Menu, X, MapPin, Phone, Mail, Clock, CheckCircle2, Medal, Building2, Sparkles, Target, Eye, HeartHandshake, ArrowUpRight, ArrowUp, ArrowDown, Quote, Landmark, Sigma, Bot, ChevronLeft, ChevronRight } from 'lucide-react';
 import LogoIcon from '../../public/logo.jsx';
 const LOGO = '/logo.png';
 const IMG = {
@@ -49,21 +49,34 @@ const IMG = {
     fundamental2: '/etapas/Fundamental II-frente.png',
     medio: '/etapas/medio-frente.png'
   },
-  olimpiadas: {
+  medalhas: {
     portugues: [
-      '/olimpiadas/portugues1.png',
-      '/olimpiadas/portugues2.png'
+      '/medalha/pot/beaba1.jpg',
+      '/medalha/pot/beaba2.jpg',
+      '/medalha/pot/op1.jpg',
+      '/medalha/pot/op2.jpg',
+      '/medalha/pot/op3.jpg'
     ],
     matematica: [
-      '/olimpiadas/matematica1.png',
-      '/olimpiadas/matematica2.png'
-    ],
-    esportes: [
-      '/olimpiadas/esportes1.png',
-      '/olimpiadas/esportes2.png'
+      '/medalha/mat/canguru1.jpg',
+      '/medalha/mat/canguru2.jpg',
+      '/medalha/mat/canguru3.jpg',
+      '/medalha/mat/canguru4.jpg',
+      '/medalha/mat/canguru5.jpg',
+      '/medalha/mat/canguru6.jpg',
+      '/medalha/mat/canguru7.jpg',
+      '/medalha/mat/canguru8.jpg',
+      '/medalha/mat/canguru9.jpg',
+      '/medalha/mat/canguru10.jpg'
     ],
     robotica: [
-      '/olimpiadas/robotica1.png',
+      '/medalha/rob/obr1.jpg',
+      '/medalha/rob/obr2.jpg',
+      '/medalha/rob/obr3.jpg'
+    ],
+    esportes: [
+      '/medalha/esp/esporte1.jpg',
+      '/medalha/esp/esporte2.jpg'
     ]
   },
 };
@@ -172,17 +185,23 @@ function PillButton({
 // ---------------------------------------------------------------------
 // Carrossel de imagens reutilizável (troca automática + bolinhas)
 // ---------------------------------------------------------------------
-function ImageCarousel({ images, alt, className = '', interval = 4000 }) {
+function ImageCarousel({ images, alt, className = '', interval = 4000, onComplete, showArrows = false }) {
   const [index, setIndex] = useState(0);
   const list = Array.isArray(images) ? images : [images];
 
+  const step = dir => {
+    setIndex(i => {
+      const next = (i + dir + list.length) % list.length;
+      if (dir > 0 && next === 0) onComplete?.();
+      return next;
+    });
+  };
+
   useEffect(() => {
-    if (list.length <= 1) return;
-    const timer = setInterval(() => {
-      setIndex(i => (i + 1) % list.length);
-    }, interval);
+    if (list.length <= 1 && !onComplete) return;
+    const timer = setInterval(() => step(1), interval);
     return () => clearInterval(timer);
-  }, [list.length, interval]);
+  }, [list.length, interval, onComplete]);
 
   return (
     <div className={`relative overflow-hidden ${className}`}>
@@ -198,6 +217,24 @@ function ImageCarousel({ images, alt, className = '', interval = 4000 }) {
           }`}
         />
       ))}
+      {showArrows && list.length > 1 && (
+        <>
+          <button
+            onClick={() => step(-1)}
+            aria-label="Foto anterior"
+            className="absolute left-3 top-1/2 -translate-y-1/2 z-10 grid place-items-center h-9 w-9 rounded-full bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 transition-colors"
+          >
+            <ChevronLeft className="h-8 w-8 text-primary" fill="currentColor" />
+          </button>
+          <button
+            onClick={() => step(1)}
+            aria-label="Próxima foto"
+            className="absolute right-3 top-1/2 -translate-y-1/2 z-10 grid place-items-center h-9 w-9 rounded-full bg-white/20 backdrop-blur-sm text-white hover:bg-white/30 transition-colors"
+          >
+            <ChevronRight className="h-8 w-8 text-primary" fill="currentColor" />
+          </button>
+        </>
+      )}
       {list.length > 1 && (
         <div className="absolute bottom-3 inset-x-0 flex justify-center gap-2 z-10">
           {list.map((_, i) => (
@@ -689,7 +726,7 @@ function Conquistas() {
             </div>
           </Reveal>
           <Reveal delay={0.1} className="relative h-full aspect-[9/10] mx-auto lg:mx-0 rounded-3xl overflow-hidden">
-            <ImageCarousel images={IMG.conquistas} alt="Conquistas do colégio" className="w-full h-full" />
+            <ImageCarousel images={IMG.conquistas} alt="Conquistas do colégio" className="w-full h-full" showArrows />
           </Reveal>
         </div>
       </div>
@@ -928,29 +965,33 @@ const OLIMPIADAS = [{
   label: 'Português',
   s: 'OPA, BEABÁ',
   icon: BookOpen,
-  images: IMG.olimpiadas.portugues
+  images: IMG.medalhas.portugues
 }, {
   key: 'matematica',
   label: 'Matemática',
   s: 'Canguru, OBMEP, OBMEP Mirim',
   icon: Sigma,
-  images: IMG.olimpiadas.matematica
+  images: IMG.medalhas.matematica
 }, {
   key: 'robotica',
   label: 'Robótica',
   s: 'OBR',
   icon: Bot,
-  images: IMG.robotica
+  images: IMG.medalhas.robotica
 }, {
   key: 'esportes',
   label: 'Esportes',
-  s: '',
+  s: 'JETS',
   icon: Trophy,
-  images: IMG.olimpiadas.esportes
+  images: IMG.medalhas.esportes
 }];
 function Medalhas() {
   const [active, setActive] = useState(OLIMPIADAS[0].key);
   const current = OLIMPIADAS.find(o => o.key === active);
+  const goNext = () => setActive(prev => {
+    const i = OLIMPIADAS.findIndex(o => o.key === prev);
+    return OLIMPIADAS[(i + 1) % OLIMPIADAS.length].key;
+  });
   return (
     <section id="medalhas" className="relative overflow-hidden bg-background text-foreground min-h-0 min-[820px]:min-h-[100dvh] flex flex-col pt-20 sm:pt-24 pb-4 sm:pb-6 lg:pb-8">
       <div className="pointer-events-none absolute -top-32 -right-24 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
@@ -980,7 +1021,7 @@ function Medalhas() {
             </div>
           </Reveal>
           <Reveal delay={0.1} className="relative h-full aspect-[9/10] mx-auto lg:mx-0 rounded-3xl overflow-hidden">
-            <ImageCarousel key={active} images={current.images} alt={`Olimpíada de ${current.label}`} className="w-full h-full" />
+            <ImageCarousel key={active} images={current.images} alt={`Olimpíada de ${current.label}`} className="w-full h-full" onComplete={goNext} showArrows />
           </Reveal>
         </div>
       </div>
