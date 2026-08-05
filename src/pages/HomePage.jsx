@@ -662,7 +662,7 @@ function Estrutura() {
   }, {
     img: IMG.library,
     icon: BookOpen,
-    t: 'Sala de Estudos',
+    t: 'Sala de estudos',
     s: 'Espaço de leitura e pesquisa para incentivar o hábito de estudar.'
   }, {
     img: IMG.trophy,
@@ -672,7 +672,7 @@ function Estrutura() {
   }, {
     img: IMG.playground,
     icon: Sparkles,
-    t: 'Parquinho',
+    t: 'Espaço recreativo',
     s: 'Espaço seguro e divertido para brincar, socializar e recarregar as energias.'
   }, {
     img: IMG.lab,
