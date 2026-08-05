@@ -602,8 +602,8 @@ function Conquistas() {
     <section id="conquistas" className="relative overflow-hidden bg-primary text-primary-foreground min-h-0 min-[820px]:min-h-[100dvh] flex flex-col pt-20 sm:pt-24 pb-4 sm:pb-6 lg:pb-8">
       <div className="pointer-events-none absolute -top-32 -right-24 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
       <div className="relative flex-1 min-h-0 flex flex-col justify-center mx-auto max-w-[90rem] w-full px-5 lg:px-10">
-        <div className="flex flex-col lg:flex-row gap-14 items-center">
-          <Reveal className="flex-1">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 items-stretch">
+          <Reveal>
             <span className="text-sm font-600 uppercase tracking-[0.2em] text-accent">Conquistas</span>
             <h2 className="mt-3 font-display font-900 text-3xl md:text-4xl lg:text-5xl leading-tight">
               Resultados que orgulham nossa comunidade
@@ -645,7 +645,7 @@ function Conquistas() {
               ))}
             </div>
           </Reveal>
-          <Reveal delay={0.1} className="relative h-full flex-[1.4] [@media(max-height:820px)]:flex-1">
+          <Reveal delay={0.1} className="relative h-full aspect-[9/10] mx-auto lg:mx-0">
             <img src={IMG.trophy} alt="Alunos comemorando conquista acadêmica" loading="lazy" decoding="async" className="rounded-3xl object-cover w-full h-full" />
           </Reveal>
         </div>
