@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { GraduationCap, Award, Trophy, Users, BookOpen, Star, Menu, X, MapPin, Phone, Mail, Clock, CheckCircle2, Medal, Building2, Sparkles, Target, Eye, HeartHandshake, ArrowUpRight, ArrowUp, ArrowDown, Quote, Landmark } from 'lucide-react';
 import LogoIcon from '../../public/logo.jsx';
 const LOGO = '/logo.png';
@@ -27,6 +27,7 @@ const IMG = {
     '/alunos/IMG_8972.jpeg',
     '/alunos/IMG_8976.jpeg'
   ],
+  conquistas: Array.from({ length: 19 }, (_, i) => `/conquistas/imagem${i}.jpg`),
 };
 const NAV = [{
   id: 'historia',
@@ -144,18 +145,20 @@ function ImageCarousel({ images, alt, className = '', interval = 4000 }) {
 
   return (
     <div className={`relative overflow-hidden ${className}`}>
-      {list.map((src, i) => (
-        <img
-          key={src}
-          src={src}
-          alt={`${alt} ${i + 1}`}
+      <AnimatePresence>
+        <motion.img
+          key={list[index]}
+          src={list[index]}
+          alt={`${alt} ${index + 1}`}
           loading="lazy"
           decoding="async"
-          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
-            i === index ? 'opacity-100' : 'opacity-0'
-          }`}
+          className="absolute inset-0 h-full w-full object-cover"
+          initial={{ opacity: 0, scale: 1.06 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ opacity: { duration: 1.1, ease: 'easeInOut' }, scale: { duration: interval / 1000 + 1, ease: 'easeOut' } }}
         />
-      ))}
+      </AnimatePresence>
       {list.length > 1 && (
         <div className="absolute bottom-3 inset-x-0 flex justify-center gap-2 z-10">
           {list.map((_, i) => (
@@ -645,8 +648,8 @@ function Conquistas() {
               ))}
             </div>
           </Reveal>
-          <Reveal delay={0.1} className="relative h-full aspect-[9/10] mx-auto lg:mx-0">
-            <img src={IMG.trophy} alt="Alunos comemorando conquista acadêmica" loading="lazy" decoding="async" className="rounded-3xl object-cover w-full h-full" />
+          <Reveal delay={0.1} className="relative h-full aspect-[9/10] mx-auto lg:mx-0 rounded-3xl overflow-hidden">
+            <ImageCarousel images={IMG.conquistas} alt="Conquistas do colégio" className="w-full h-full" />
           </Reveal>
         </div>
       </div>
