@@ -13,7 +13,12 @@ const IMG = {
     '/sala-2.png',
     '/sala-3.png'
   ],
-  trophy: '/turma.png',
+  robotica: [
+    '/projetos/robotica1.png',
+    '/projetos/robotica2.png',
+    '/projetos/robotica3.png',
+    '/projetos/robotica4.png'
+  ],
   library: 'biblioteca.png',
   // NOVOS: coloque aqui os caminhos das fotos reais de cada espaço
   parques: [
@@ -672,10 +677,10 @@ function Estrutura() {
     t: 'Sala de estudos',
     s: 'Espaço de leitura e pesquisa para incentivar o hábito de estudar.'
   }, {
-    img: IMG.trophy,
+    img: IMG.robotica,
     icon: Users,
-    t: 'Comunidade escolar',
-    s: 'Alunos, famílias e educadores unidos por um mesmo propósito.'
+    t: 'Projetos',
+    s: 'Desenvolvemos criatividade, lógica e inovação por meio de aulas práticas de robótica e tecnologia educacional.'
   }, {
     img: IMG.parques,
     icon: Sparkles,
