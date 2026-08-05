@@ -16,7 +16,10 @@ const IMG = {
   trophy: '/turma.png',
   library: 'biblioteca.png',
   // NOVOS: coloque aqui os caminhos das fotos reais de cada espaço
-  playground: '/parquinho.png',
+  parques: [
+    '/parquinho.png',
+    '/patio.png'
+  ],
   lab: '/laboratorio.png',
   auditorium: '/auditorio.png',
   lion: '/Lion.png',
@@ -145,20 +148,18 @@ function ImageCarousel({ images, alt, className = '', interval = 4000 }) {
 
   return (
     <div className={`relative overflow-hidden ${className}`}>
-      <AnimatePresence>
-        <motion.img
-          key={list[index]}
-          src={list[index]}
-          alt={`${alt} ${index + 1}`}
+      {list.map((src, i) => (
+        <img
+          key={src}
+          src={src}
+          alt={`${alt} ${i + 1}`}
           loading="lazy"
           decoding="async"
-          className="absolute inset-0 h-full w-full object-cover"
-          initial={{ opacity: 0, scale: 1.06 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ opacity: { duration: 1.1, ease: 'easeInOut' }, scale: { duration: interval / 1000 + 1, ease: 'easeOut' } }}
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
+            i === index ? 'opacity-100' : 'opacity-0'
+          }`}
         />
-      </AnimatePresence>
+      ))}
       {list.length > 1 && (
         <div className="absolute bottom-3 inset-x-0 flex justify-center gap-2 z-10">
           {list.map((_, i) => (
@@ -673,7 +674,7 @@ function Estrutura() {
     t: 'Comunidade escolar',
     s: 'Alunos, famílias e educadores unidos por um mesmo propósito.'
   }, {
-    img: IMG.playground,
+    img: IMG.parques,
     icon: Sparkles,
     t: 'Espaço recreativo',
     s: 'Espaço seguro e divertido para brincar, socializar e recarregar as energias.'
