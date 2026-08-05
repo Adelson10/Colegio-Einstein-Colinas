@@ -838,7 +838,7 @@ const ETAPAS = [{
   imgFrente: IMG.etapasFrente.maternal
 }, {
   key: 'infantil',
-  label: 'Ensino Infantil',
+  label: 'Educação Infantil',
   idades: '3 - 5 anos',
   color: 'bg-[#036DAC]',
   img: IMG.etapas.infantil,
