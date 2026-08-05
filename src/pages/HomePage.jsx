@@ -293,20 +293,20 @@ function Hero() {
               </motion.div>
             </div>
 
-            <div className="text-center lg:text-left h-full flex-col flex justify-center gap-8">
+            <div className="text-center lg:text-left h-full flex-col flex justify-center gap-8 py-8 lg:p-0">
               <motion.div
                 initial={{ opacity: 0, y: 26 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.1 }}
               >
-                <h1 className="font-display font-900 leading-[1.05] tracking-tight via-70% text-4xl sm:text-5xl md:text-6xl lg:text-7xl bg-gradient-to-b from-sky-400 via-primary to-primary/80 bg-clip-text text-transparent">
+                <h1 className="font-display font-900 leading-[1.05] tracking-tight via-70% text-5xl lg:text-[3.5rem] xl:text-7xl bg-gradient-to-b from-sky-400 via-primary to-primary/80 bg-clip-text text-transparent">
                   Formar mentes
                 </h1>
                 <span>
-                  <h1 className="inline font-display font-900 leading-[1.05] via-70% tracking-tight text-4xl sm:text-5xl md:text-6xl lg:text-7xl bg-gradient-to-b from-sky-400 via-primary to-primary/80 bg-clip-text text-transparent">
+                  <h1 className="inline font-display font-900 leading-[1.05] via-70% tracking-tight text-4xl lg:text-[3.5rem] xl:text-7xl bg-gradient-to-b from-sky-400 via-primary to-primary/80 bg-clip-text text-transparent">
                     para o
                   </h1>
-                  <h1 className="inline font-display font-900 leading-[1.05] tracking-tight text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-accent">
+                  <h1 className="inline font-display font-900 leading-[1.05] tracking-tight text-4xl lg:text-[3.5rem] xl:text-7xl text-accent">
                     {'  '}futuro.
                   </h1>
                 </span>
@@ -741,9 +741,30 @@ function Estrutura() {
         </section>;
 }
 
+const TESTIMONIALS = [
+  {
+    text: 'Meu filho encontrou no Colégio Albert Einstein um ambiente acolhedor e exigente ao mesmo tempo. Em poucos meses, vimos evolução real no desempenho e na confiança dele.',
+    name: 'Mãe de aluno do Fundamental II',
+    img: IMG.alunos[0]
+  },
+  {
+    text: 'A dedicação dos professores faz toda a diferença. Minha filha se sente acolhida e motivada a aprender todos os dias.',
+    name: 'Mãe de aluna da Educação Infantil',
+    img: IMG.alunos[1]
+  },
+  {
+    text: 'Estudar no Colégio Albert Einstein me preparou não só para as provas, mas para a vida. Levo os valores que aprendi aqui para todo lugar.',
+    name: 'Ex-aluno do Ensino Médio',
+    img: IMG.alunos[2]
+  }
+];
 function Testimonials() {
-  return <section className="py-20 lg:py-28 bg-secondary/50">
-            <div className="mx-auto max-w-[90rem] px-5 lg:px-10 grid lg:grid-cols-2 gap-12 items-center">
+  const [active, setActive] = useState(0);
+  const current = TESTIMONIALS[active];
+  const go = dir => setActive(i => (i + dir + TESTIMONIALS.length) % TESTIMONIALS.length);
+
+  return <section id="depoimentos" className="relative overflow-hidden min-h-0 min-[820px]:min-h-[100dvh] flex flex-col justify-center py-20 sm:py-24 bg-secondary/50">
+            <div className="mx-auto max-w-[90rem] w-full px-5 lg:px-10 grid lg:grid-cols-2 gap-12 items-center">
                 <Reveal>
                     <span className="text-sm font-600 uppercase tracking-[0.2em] text-accent">Depoimentos</span>
                     <h2 className="mt-3 font-display font-900 text-3xl md:text-4xl lg:text-5xl text-primary leading-tight">
@@ -752,36 +773,38 @@ function Testimonials() {
                     <p className="mt-4 text-muted-foreground max-w-md">
                         Famílias e alunos que viveram de perto a proposta pedagógica do Colégio Albert Einstein.
                     </p>
-                    <div className="mt-8 flex gap-5 rounded-3xl bg-card border border-border p-7">
+                    <div className="mt-8 flex gap-6 rounded-3xl bg-card border border-border p-8 lg:p-10">
                         <div className="flex flex-col items-center gap-2 shrink-0">
-                            <span className="grid place-items-center h-8 w-8 rounded-full bg-accent/15 text-accent">
+                            <button onClick={() => go(-1)} aria-label="Depoimento anterior" className="grid place-items-center h-8 w-8 rounded-full bg-accent/15 text-accent hover:bg-accent/25 transition-colors">
                                 <ArrowUp className="h-4 w-4" />
-                            </span>
-                            <span className="grid place-items-center h-8 w-8 rounded-full bg-primary text-primary-foreground">
+                            </button>
+                            <button onClick={() => go(1)} aria-label="Próximo depoimento" className="grid place-items-center h-8 w-8 rounded-full bg-primary text-primary-foreground hover:brightness-110 transition">
                                 <ArrowDown className="h-4 w-4" />
-                            </span>
+                            </button>
                         </div>
                         <div>
                             <Quote className="h-6 w-6 text-accent/60" />
-                            <p className="mt-2 text-foreground leading-relaxed">
-                                Meu filho encontrou no Colégio Albert Einstein um ambiente acolhedor e exigente ao mesmo tempo.
-                                Em poucos meses, vimos evolução real no desempenho e na confiança dele.
+                            <p key={current.text} className="mt-2 text-foreground leading-relaxed">
+                                {current.text}
                             </p>
-                            <div className="mt-4 text-sm font-600 text-primary">Mãe de aluno do Fundamental II</div>
+                            <div className="mt-4 text-sm font-600 text-primary">{current.name}</div>
                         </div>
                     </div>
                 </Reveal>
                 <Reveal delay={0.1} className="flex justify-center lg:justify-end">
-                    <div className="flex flex-col gap-4">
-                        <span className="grid place-items-center h-16 w-16 rounded-full ring-4 ring-background overflow-hidden bg-accent/15 text-accent">
-                            <img src={IMG.founder} alt="" className="h-full w-full object-cover" />
-                        </span>
-                        <span className="grid place-items-center h-16 w-16 rounded-full ring-4 ring-background overflow-hidden bg-accent/15 text-accent ml-8">
-                            <img src={IMG.finance} alt="" className="h-full w-full object-cover" />
-                        </span>
-                        <span className="grid place-items-center h-16 w-16 rounded-full ring-4 ring-background overflow-hidden bg-accent/15 text-accent ml-16">
-                            <GraduationCap className="h-6 w-6" />
-                        </span>
+                    <div className="relative w-full max-w-sm aspect-[4/5] rounded-3xl overflow-hidden ring-4 ring-background">
+                        <AnimatePresence mode="wait">
+                            <motion.img
+                                key={current.img}
+                                src={current.img}
+                                alt={current.name}
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.5 }}
+                                className="absolute inset-0 h-full w-full object-cover"
+                            />
+                        </AnimatePresence>
                     </div>
                 </Reveal>
             </div>
