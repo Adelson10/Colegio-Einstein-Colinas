@@ -825,8 +825,8 @@ function Etapas() {
                   <div className={`relative w-full aspect-[4/5] ${e.color} rounded-[0px_0px_50%_50%/0px_0px_40%_40%] overflow-hidden flex items-center justify-center`}>
                     <GraduationCap className="h-10 w-10 sm:h-14 sm:w-14 lg:h-16 lg:w-16 text-white/30" strokeWidth={1.5} />
                   </div>
-                  <h3 className="mt-3 sm:mt-5 font-display font-700 text-sm sm:text-xl   text-primary-foreground">{e.label}</h3>
-                  <span className="mt-1 text-xs sm:text-sm text-primary-foreground/60">{e.idades}</span>
+                  <h3 className="mt-3 sm:mt-5 font-display font-700 text-sm sm:text-2xl   text-primary-foreground">{e.label}</h3>
+                  <span className="mt-1 text-xs sm:text-base text-primary-foreground/60">{e.idades}</span>
                 </Reveal>)}
         </div>
       </div>
