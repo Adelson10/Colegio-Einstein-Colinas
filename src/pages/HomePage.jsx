@@ -38,7 +38,7 @@ const IMG = {
   conquistas: Array.from({ length: 19 }, (_, i) => `/conquistas/imagem${i}.jpg`),
   etapas: {
     maternal: '/etapas/maternal.png',
-    infantil: '/etapas/infanttil.png',
+    infantil: '/etapas/infantil.png',
     fundamental: '/etapas/Fundamental.png',
     medio: '/etapas/medio.png'
   },
@@ -858,23 +858,7 @@ function Etapas() {
             Escolha a etapa ideal para o seu filho.
           </h2>
         </Reveal>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        <div className="mt-6 sm:mt-8 lg:mt-14 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 lg:gap-8">
-=======
-        <div className="mt-10 sm:mt-20 lg:mt-[10rem] grid grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-10 sm:gap-x-6 sm:gap-y-14 lg:gap-x-8 lg:gap-y-16">
->>>>>>> 9c8c227908e266db27c9feb04cedde33088ea85b
-=======
-        <div className="mt-6 sm:mt-8 lg:mt-14 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 lg:gap-8">
->>>>>>> parent of b24dcf1 (Merge branch 'main' of https://github.com/Adelson10/Colegio-Einstein-Colinas)
-=======
         <div className="mt-10 sm:mt-20 lg:mt-[8rem] grid grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-10 sm:gap-x-6 sm:gap-y-14 lg:gap-x-8 lg:gap-y-16">
->>>>>>> parent of 9c8c227 (update)
-=======
-        <div className="mt-10 sm:mt-20 lg:mt-[8rem] grid grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-10 sm:gap-x-6 sm:gap-y-14 lg:gap-x-8 lg:gap-y-16">
->>>>>>> parent of d5f29c9 (a)
           {ETAPAS.map((e, i) => <Reveal key={e.key} delay={i * 0.1} className="flex flex-col items-center text-center">
                   <div className={`relative w-full aspect-[4/5] ${e.color} rounded-[0px_0px_50%_50%/0px_0px_40%_40%]`}>
                     <img
