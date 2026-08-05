@@ -45,6 +45,9 @@ const NAV = [{
   id: 'conquistas',
   label: 'Conquistas'
 }, {
+  id: 'etapas',
+  label: 'Etapas'
+}, {
   id: 'contato',
   label: 'Contato'
 }];
@@ -184,7 +187,7 @@ function Navbar() {
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 20);
-      const isOverDark = ['missao', 'conquistas'].some(id => {
+      const isOverDark = ['missao', 'conquistas', 'etapas'].some(id => {
         const el = document.getElementById(id);
         if (!el) return false;
         const rect = el.getBoundingClientRect();
@@ -785,53 +788,49 @@ function Testimonials() {
 }
 
 const ETAPAS = [{
+  key: 'maternal',
+  label: 'Maternal',
+  idades: '2 - 3 anos',
+  color: 'bg-[#027DBD]'
+}, {
   key: 'infantil',
-  range: '2–5',
-  unit: 'anos',
-  title: 'Educação Infantil',
-  text: 'Primeiros passos da alfabetização com muito cuidado, brincadeiras e descobertas.',
-  items: ['Turmas reduzidas', 'Estímulo à autonomia', 'Parquinho e espaços lúdicos', 'Acompanhamento pedagógico próximo'],
-  highlight: false
+  label: 'Infantil',
+  idades: '4 - 5 anos',
+  color: 'bg-[#0368A6]'
 }, {
   key: 'fundamental',
-  range: '6–14',
-  unit: 'anos',
-  title: 'Ensino Fundamental',
-  text: 'Base sólida em conteúdo e valores, com metodologia UNOPAR e foco em resultados.',
-  items: ['Material didático UNOPAR', 'Laboratórios e biblioteca', 'Preparação para o Ensino Médio', 'Acompanhamento individualizado'],
-  highlight: true
+  label: 'Ensino Fundamental',
+  idades: '6 - 14 anos',
+  color: 'bg-[#045290]'
+}, {
+  key: 'medio',
+  label: 'Ensino Médio',
+  idades: '15 - 17 anos',
+  color: 'bg-[#053D79]'
 }];
 function Etapas() {
-  return <section className="py-20 lg:py-28 bg-primary text-primary-foreground">
-            <div className="mx-auto max-w-[90rem] px-5 lg:px-10 text-center">
-                <Reveal>
-                    <span className="text-sm font-600 uppercase tracking-[0.2em] text-accent">Matrículas abertas</span>
-                    <h2 className="mt-3 font-display font-900 text-3xl md:text-4xl lg:text-5xl leading-tight">
-                        Escolha a etapa ideal para o seu filho.
-                    </h2>
-                </Reveal>
-                <div className="mt-14 grid sm:grid-cols-2 gap-6 text-left">
-                    {ETAPAS.map((e, i) => <Reveal key={e.key} delay={i * 0.1} className={`rounded-3xl p-8 ${e.highlight ? 'bg-white text-foreground' : 'bg-white/5 border border-white/10'}`}>
-                            <h3 className={`font-display font-700 text-lg ${e.highlight ? 'text-primary' : ''}`}>{e.title}</h3>
-                            <div className="mt-4 flex items-end gap-2">
-                                <span className={`font-display font-900 text-5xl ${e.highlight ? 'text-primary' : 'text-accent'}`}>{e.range}</span>
-                                <span className={`text-sm pb-1.5 ${e.highlight ? 'text-muted-foreground' : 'text-primary-foreground/60'}`}>{e.unit}</span>
-                            </div>
-                            <p className={`mt-3 text-sm ${e.highlight ? 'text-muted-foreground' : 'text-primary-foreground/70'}`}>{e.text}</p>
-                            <div className="mt-6">
-                                <PillButton href={WHATSAPP_URL} variant={e.highlight ? 'solid' : 'accent'} className="w-full justify-center">
-                                    Matricule-se
-                                </PillButton>
-                            </div>
-                            <ul className="mt-6 space-y-2.5">
-                                {e.items.map(t => <li key={t} className={`flex items-start gap-2.5 text-sm ${e.highlight ? 'text-foreground' : 'text-primary-foreground/85'}`}>
-                                        <CheckCircle2 className="h-4 w-4 text-accent shrink-0 mt-0.5" /> {t}
-                                    </li>)}
-                            </ul>
-                        </Reveal>)}
-                </div>
-            </div>
-        </section>;
+  return (
+    <section id="etapas" className="relative overflow-hidden bg-primary text-primary-foreground min-h-0 min-[820px]:min-h-[100dvh] flex flex-col pt-20 sm:pt-24 pb-4 sm:pb-6 lg:pb-8">
+      <div className="pointer-events-none absolute -top-32 -right-24 h-96 w-96 rounded-full bg-accent/10 blur-3xl" />
+      <div className="relative flex-1 min-h-0 flex flex-col justify-center mx-auto max-w-[90rem] w-full px-5 lg:px-10 text-center">
+        <Reveal>
+          <span className="text-xs sm:text-sm font-600 uppercase tracking-[0.2em] text-accent">Matrículas abertas</span>
+          <h2 className="mt-1.5 sm:mt-3 font-display font-900 text-xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight">
+            Escolha a etapa ideal para o seu filho.
+          </h2>
+        </Reveal>
+        <div className="mt-6 sm:mt-8 lg:mt-14 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 lg:gap-8">
+          {ETAPAS.map((e, i) => <Reveal key={e.key} delay={i * 0.1} className="flex flex-col items-center text-center">
+                  <div className={`relative w-full aspect-[4/5] ${e.color} rounded-[0px_0px_50%_50%/0px_0px_40%_40%] overflow-hidden flex items-center justify-center`}>
+                    <GraduationCap className="h-10 w-10 sm:h-14 sm:w-14 lg:h-16 lg:w-16 text-white/30" strokeWidth={1.5} />
+                  </div>
+                  <h3 className="mt-3 sm:mt-5 font-display font-700 text-sm sm:text-xl   text-primary-foreground">{e.label}</h3>
+                  <span className="mt-1 text-xs sm:text-sm text-primary-foreground/60">{e.idades}</span>
+                </Reveal>)}
+        </div>
+      </div>
+    </section>
+  );
 }
 
 function Contato() {
