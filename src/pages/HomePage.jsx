@@ -35,6 +35,20 @@ const IMG = {
     '/alunos/IMG_8976.jpeg'
   ],
   conquistas: Array.from({ length: 19 }, (_, i) => `/conquistas/imagem${i}.jpg`),
+  etapas: {
+    maternal: '/etapas/maternal.png',
+    infantil: '/etapas/infantil.png',
+    fundamental1: '/etapas/Fundamental I.png',
+    fundamental2: '/etapas/Fundamental II.png',
+    medio: '/etapas/medio.png'
+  },
+  etapasFrente: {
+    maternal: '/etapas/maternal-frente.png',
+    infantil: '/etapas/infantil-frente.png',
+    fundamental1: '/etapas/Fundamental I-frente.png',
+    fundamental2: '/etapas/Fundamental II-frente.png',
+    medio: '/etapas/medio-frente.png'
+  },
 };
 const NAV = [{
   id: 'historia',
@@ -819,22 +833,37 @@ const ETAPAS = [{
   key: 'maternal',
   label: 'Maternal',
   idades: '2 - 3 anos',
-  color: 'bg-[#027DBD]'
+  color: 'bg-[#027DBD]',
+  img: IMG.etapas.maternal,
+  imgFrente: IMG.etapasFrente.maternal
 }, {
   key: 'infantil',
   label: 'Infantil',
   idades: '4 - 5 anos',
-  color: 'bg-[#0368A6]'
+  color: 'bg-[#036DAC]',
+  img: IMG.etapas.infantil,
+  imgFrente: IMG.etapasFrente.infantil
 }, {
-  key: 'fundamental',
-  label: 'Ensino Fundamental',
-  idades: '6 - 14 anos',
-  color: 'bg-[#045290]'
+  key: 'fundamental1',
+  label: 'Ensino Fundamental I',
+  idades: '6 - 10 anos',
+  color: 'bg-[#045D9B]',
+  img: IMG.etapas.fundamental1,
+  imgFrente: IMG.etapasFrente.fundamental1
+}, {
+  key: 'fundamental2',
+  label: 'Ensino Fundamental II',
+  idades: '11 - 14 anos',
+  color: 'bg-[#044D8A]',
+  img: IMG.etapas.fundamental2,
+  imgFrente: IMG.etapasFrente.fundamental2
 }, {
   key: 'medio',
   label: 'Ensino Médio',
   idades: '15 - 17 anos',
-  color: 'bg-[#053D79]'
+  color: 'bg-[#053D79]',
+  img: IMG.etapas.medio,
+  imgFrente: IMG.etapasFrente.medio
 }];
 function Etapas() {
   return (
@@ -847,22 +876,24 @@ function Etapas() {
             Escolha a etapa ideal para o seu filho.
           </h2>
         </Reveal>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-        <div className="mt-6 sm:mt-8 lg:mt-14 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 lg:gap-8">
-=======
-        <div className="mt-10 sm:mt-20 lg:mt-[10rem] grid grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-10 sm:gap-x-6 sm:gap-y-14 lg:gap-x-8 lg:gap-y-16">
->>>>>>> 9c8c227908e266db27c9feb04cedde33088ea85b
-=======
-        <div className="mt-6 sm:mt-8 lg:mt-14 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 lg:gap-8">
->>>>>>> parent of b24dcf1 (Merge branch 'main' of https://github.com/Adelson10/Colegio-Einstein-Colinas)
-=======
-        <div className="mt-10 sm:mt-20 lg:mt-[8rem] grid grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-10 sm:gap-x-6 sm:gap-y-14 lg:gap-x-8 lg:gap-y-16">
->>>>>>> parent of 9c8c227 (update)
+        <div className="mt-16 sm:mt-20 lg:mt-[10rem] grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-x-3 gap-y-16 sm:gap-x-6 sm:gap-y-14 lg:gap-x-8 lg:gap-y-16">
           {ETAPAS.map((e, i) => <Reveal key={e.key} delay={i * 0.1} className="flex flex-col items-center text-center">
-                  <div className={`relative w-full aspect-[4/5] ${e.color} rounded-[0px_0px_50%_50%/0px_0px_40%_40%] overflow-hidden flex items-center justify-center`}>
-                    <GraduationCap className="h-10 w-10 sm:h-14 sm:w-14 lg:h-16 lg:w-16 text-white/30" strokeWidth={1.5} />
+                  <div className={`relative w-full aspect-[4/5] ${e.color} rounded-[0px_0px_50%_50%/0px_0px_40%_40%]`}>
+                    <img
+                      src={e.img}
+                      alt={e.label}
+                      loading="lazy"
+                      decoding="async"
+                      className="absolute inset-x-0 -bottom-1 h-[115%] w-full sm:h-[145%] sm:w-full object-cover object-top [clip-path:inset(0px_0px_0px_0px_round_0px_0px_70%_70%/0px_0px_50%_50%)] sm:[clip-path:inset(0px_0px_0px_0px_round_0px_0px_68%_68%/0px_0px_36%_36%)]"
+                    />
+                    <img
+                      src={e.imgFrente}
+                      alt=""
+                      aria-hidden="true"
+                      loading="lazy"
+                      decoding="async"
+                      className="absolute left-1/2 -translate-x-1/2 -bottom-1 h-[115%] h-full w-full max-w-full sm:h-[145%] sm:w-[120%] object-cover object-top sm:max-w-[120%]"
+                    />
                   </div>
                   <h3 className="mt-3 sm:mt-5 font-display font-700 text-sm sm:text-2xl   text-primary-foreground">{e.label}</h3>
                   <span className="mt-1 text-xs sm:text-base text-primary-foreground/60">{e.idades}</span>
