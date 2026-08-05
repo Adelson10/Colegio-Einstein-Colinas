@@ -832,14 +832,14 @@ function Testimonials() {
 const ETAPAS = [{
   key: 'maternal',
   label: 'Maternal',
-  idades: '2 - 3 anos',
+  idades: '1.5 - 2 anos',
   color: 'bg-[#027DBD]',
   img: IMG.etapas.maternal,
   imgFrente: IMG.etapasFrente.maternal
 }, {
   key: 'infantil',
-  label: 'Infantil',
-  idades: '4 - 5 anos',
+  label: 'Ensino Infantil',
+  idades: '3 - 5 anos',
   color: 'bg-[#036DAC]',
   img: IMG.etapas.infantil,
   imgFrente: IMG.etapasFrente.infantil
