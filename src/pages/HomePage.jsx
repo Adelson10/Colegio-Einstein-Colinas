@@ -4,7 +4,6 @@ import { GraduationCap, Award, Trophy, Users, BookOpen, Star, Menu, X, MapPin, P
 import LogoIcon from '../../public/logo.jsx';
 const LOGO = '/logo.png';
 const IMG = {
-  building: 'https://horizons-cdn.hostinger.com/1efc1057-2848-415a-b5c2-e492130a8d44/d8f2f93b491959f0074077ffa7489a29.png',
   founder: '/suelena.png',
   finance: '/odilon.png',
   // AGORA É UM ARRAY: adicione aqui os caminhos das outras fotos da sala de aula
@@ -38,8 +37,9 @@ const IMG = {
   conquistas: Array.from({ length: 19 }, (_, i) => `/conquistas/imagem${i}.jpg`),
   etapas: {
     maternal: '/etapas/maternal.png',
-    infantil: '/etapas/infanttil.png',
-    fundamental: '/etapas/Fundamental.png',
+    infantil: '/etapas/infantil.png',
+    fundamental1: '/etapas/Fundamental I.png',
+    fundamental2: '/etapas/Fundamental II.png',
     medio: '/etapas/medio.png'
   },
 };
@@ -832,14 +832,20 @@ const ETAPAS = [{
   key: 'infantil',
   label: 'Infantil',
   idades: '4 - 5 anos',
-  color: 'bg-[#0368A6]',
+  color: 'bg-[#036DAC]',
   img: IMG.etapas.infantil
 }, {
-  key: 'fundamental',
-  label: 'Ensino Fundamental',
-  idades: '6 - 14 anos',
-  color: 'bg-[#045290]',
-  img: IMG.etapas.fundamental
+  key: 'fundamental1',
+  label: 'Ensino Fundamental I',
+  idades: '6 - 10 anos',
+  color: 'bg-[#045D9B]',
+  img: IMG.etapas.fundamental1
+}, {
+  key: 'fundamental2',
+  label: 'Ensino Fundamental II',
+  idades: '11 - 14 anos',
+  color: 'bg-[#044D8A]',
+  img: IMG.etapas.fundamental2
 }, {
   key: 'medio',
   label: 'Ensino Médio',
@@ -858,7 +864,7 @@ function Etapas() {
             Escolha a etapa ideal para o seu filho.
           </h2>
         </Reveal>
-        <div className="mt-10 sm:mt-20 lg:mt-[10rem] grid grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-10 sm:gap-x-6 sm:gap-y-14 lg:gap-x-8 lg:gap-y-16">
+        <div className="mt-10 sm:mt-20 lg:mt-[10rem] grid grid-cols-2 lg:grid-cols-5 gap-x-3 gap-y-10 sm:gap-x-6 sm:gap-y-14 lg:gap-x-8 lg:gap-y-16">
           {ETAPAS.map((e, i) => <Reveal key={e.key} delay={i * 0.1} className="flex flex-col items-center text-center">
                   <div className={`relative w-full aspect-[4/5] ${e.color} rounded-[0px_0px_50%_50%/0px_0px_40%_40%]`}>
                     <img
