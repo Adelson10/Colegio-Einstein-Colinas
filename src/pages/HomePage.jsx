@@ -858,7 +858,7 @@ function Etapas() {
             Escolha a etapa ideal para o seu filho.
           </h2>
         </Reveal>
-        <div className="mt-10 sm:mt-20 lg:mt-[8rem] grid grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-10 sm:gap-x-6 sm:gap-y-14 lg:gap-x-8 lg:gap-y-16">
+        <div className="mt-10 sm:mt-20 lg:mt-[10rem] grid grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-10 sm:gap-x-6 sm:gap-y-14 lg:gap-x-8 lg:gap-y-16">
           {ETAPAS.map((e, i) => <Reveal key={e.key} delay={i * 0.1} className="flex flex-col items-center text-center">
                   <div className={`relative w-full aspect-[4/5] ${e.color} rounded-[0px_0px_50%_50%/0px_0px_40%_40%]`}>
                     <img
