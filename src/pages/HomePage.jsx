@@ -38,7 +38,6 @@ const IMG = {
   alunos: [
     '/alunos/IMG_8975.jpeg',
     '/alunos/IMG_8972.jpeg',
-    '/alunos/IMG_8976.jpeg'
   ],
   conquistas: Array.from({ length: 19 }, (_, i) => `/conquistas/imagem${i}.jpg`),
   etapas: {
@@ -354,7 +353,7 @@ function Hero() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.5 }}
-                className="flex items-center gap-4"
+                className="flex items-center gap-4 justify-center"
               >
                 <div className="flex -space-x-3">
                   {[
@@ -364,9 +363,10 @@ function Hero() {
                     <AvatarDot key={index} src={avatar.src} icon={avatar.icon} style={{ zIndex: index }} />
                   ))}
                 </div>
-                <div className="text-left">
-                  <div className="font-display font-900 text-4xl text-primary leading-none">600+</div>
-                  <div className="text-[14px] text-base/3 text-muted-foreground mt-1">Alunos em nossa comunidade</div>
+                <div className="flex w-fit flex-col text-left">
+                  <div className="font-display w-fit font-900 text-4xl text-primary leading-none">600+</div>
+                  <div className="text-[14px]/3 w-fit whitespace-nowrap text-muted-foreground mt-1 ">Alunos em</div>
+                  <div className="text-[14px]/3 w-fit whitespace-nowrap text-muted-foreground mt-1 ">nossa comunidade</div>
                 </div>
               </motion.div>
             </div>
@@ -429,9 +429,9 @@ function Hero() {
                     <AvatarDot key={index} src={avatar.src} icon={avatar.icon} style={{ zIndex: index }} />
                   ))}
                 </div>
-                <div className="text-left">
-                  <div className="font-display font-900 text-xl text-primary leading-none">600+</div>
-                  <div className="text-xs text-muted-foreground mt-1">Alunos em nossa comunidade</div>
+                <div className="flex w-fit flex-col text-left">
+                  <div className="w-fit font-display font-900 text-xl text-primary leading-none">600+</div>
+                  <div className="w-fit whitespace-nowrap text-xs text-muted-foreground mt-1">Alunos em nossa comunidade</div>
                 </div>
               </motion.div>
             </div>
