@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { GraduationCap, Award, Trophy, Users, BookOpen, Star, Menu, X, MapPin, Phone, Mail, Clock, CheckCircle2, Medal, Building2, Sparkles, Target, Eye, HeartHandshake, ArrowUpRight, ArrowUp, ArrowDown, Quote, Landmark, Sigma, Bot, ChevronLeft, ChevronRight } from 'lucide-react';
 import LogoIcon from '../../public/logo.jsx';
 const LOGO = '/logo.png';
@@ -703,7 +703,7 @@ function Conquistas() {
                 <Quote className="inline-block h-8 w-8 ml-1 mb-1 text-accent" fill="currentColor" />
               </p>
             </div>
-            <div className="mt-8 grid grid-cols-2 gap-3 lg:gap-6">
+            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3 lg:gap-6">
               {[{
                 icon: Medal,
                 t: '3º lugar do Estado',
@@ -839,8 +839,14 @@ const TESTIMONIALS = [
 ];
 function Testimonials() {
   const [active, setActive] = useState(0);
+  const [pulse, setPulse] = useState(0);
   const current = TESTIMONIALS[active];
   const go = dir => setActive(i => (i + dir + TESTIMONIALS.length) % TESTIMONIALS.length);
+
+  useEffect(() => {
+    const timer = setInterval(() => setPulse(p => p + 1), 4000);
+    return () => clearInterval(timer);
+  }, []);
 
   return <section id="depoimentos" className="relative overflow-hidden min-h-0 min-[820px]:min-h-[100dvh] flex flex-col justify-center py-20 sm:py-24 bg-secondary/50">
             <div className="mx-auto max-w-[90rem] w-full px-5 lg:px-10 grid lg:grid-cols-2 gap-12 items-center">
@@ -857,34 +863,33 @@ function Testimonials() {
                             <button onClick={() => go(-1)} aria-label="Depoimento anterior" className="grid place-items-center h-8 w-8 rounded-full bg-accent/15 text-accent hover:bg-accent/25 transition-colors">
                                 <ArrowUp className="h-4 w-4" />
                             </button>
-                            <button onClick={() => go(1)} aria-label="Próximo depoimento" className="grid place-items-center h-8 w-8 rounded-full bg-primary text-primary-foreground hover:brightness-110 transition">
-                                <ArrowDown className="h-4 w-4" />
+                            <button onClick={() => go(1)} aria-label="Próximo depoimento" className="relative grid place-items-center h-8 w-8 rounded-full bg-primary text-primary-foreground hover:brightness-110 transition">
+                                <span key={pulse} className="absolute inset-1 rounded-full bg-primary/80 animate-[ping_1s_cubic-bezier(0,0,0.2,1)_1] pointer-events-none" />
+                                <ArrowDown className="relative h-4 w-4" />
                             </button>
                         </div>
                         <div>
                             <Quote className="h-6 w-6 text-accent/60 rotate-180" />
                             <p key={current.text} className="mt-2 text-foreground leading-relaxed">
                                 {current.text}
-                                <Quote className="inline-block h-4 w-4 ml-1 mb-1 text-accent/60 " />
+                                <Quote className="inline-block h-6 w-6 ml-1 mb-1 text-accent/60 " />
                             </p>
                             <div className="mt-4 text-sm font-600 text-primary">{current.name}</div>
                         </div>
                     </div>
                 </Reveal>
-                <Reveal delay={0.1} className="flex justify-center lg:justify-end">
-                    <div className="relative w-full max-w-sm aspect-[4/5] rounded-3xl overflow-hidden ring-4 ring-background">
-                        <AnimatePresence mode="wait">
-                            <motion.img
-                                key={current.img}
-                                src={current.img}
-                                alt={current.name}
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                transition={{ duration: 0.5 }}
-                                className="absolute inset-0 h-full w-full object-cover"
-                            />
-                        </AnimatePresence>
+                <Reveal delay={0.1} className="flex justify-center lg:justify-center">
+                    <div className="relative h-[28rem] w-72 lg:h-[36rem] lg:w-96">
+                        {TESTIMONIALS.map((t, i) => {
+                          const isActive = i === active;
+                          const deckStyles = ['-rotate-6 -translate-x-4 -translate-y-2', 'rotate-12 translate-x-5 translate-y-3', '-rotate-3 translate-x-1 -translate-y-4'];
+                          return <button key={t.name} onClick={() => setActive(i)} aria-label={t.name} style={{ zIndex: isActive ? 10 : i }} className={`absolute inset-0 overflow-hidden rounded-3xl shadow-xl transition-all duration-500 ${isActive ? 'rotate-0 translate-x-0 translate-y-0 scale-100 opacity-100' : `scale-90 opacity-80 hover:opacity-100 ${deckStyles[i % deckStyles.length]}`}`}>
+                                <img src={t.img} alt={t.name} loading="lazy" decoding="async" className="h-full w-full object-cover" />
+                            </button>;
+                        })}
+                        <span key={active} className={`pointer-events-none absolute -bottom-6 -right-6 z-20 grid place-items-center h-24 w-24 lg:h-28 lg:w-28 rounded-full shadow-xl overflow-hidden transition-transform duration-500 ${['rotate-12', '-rotate-6', 'rotate-6'][active % 3]}`}>
+                            <img src={LOGO} alt="" aria-hidden="true" className="h-full w-full object-contain" />
+                        </span>
                     </div>
                 </Reveal>
             </div>
@@ -954,7 +959,7 @@ function Etapas() {
                       aria-hidden="true"
                       loading="lazy"
                       decoding="async"
-                      className="absolute left-1/2 -translate-x-1/2 -bottom-1 h-[115%] h-full w-full max-w-full sm:h-[145%] sm:w-[120%] object-cover object-top sm:max-w-[120%]"
+                      className="absolute left-1/2 -translate-x-1/2 -bottom-1 h-[115%] w-full max-w-full sm:h-[145%] sm:w-[120%] object-cover object-top sm:max-w-[120%]"
                     />
                   </div>
                   <h3 className="mt-3 sm:mt-5 font-display font-700 text-sm sm:text-2xl   text-primary-foreground">{e.label}</h3>
@@ -1016,7 +1021,7 @@ function Medalhas() {
                 <Quote className="inline-block h-8 w-8 ml-1 mb-1 text-accent" fill="currentColor" />
               </p>
             </div>
-            <div className="mt-8 grid grid-cols-2 gap-3 lg:gap-6">
+            <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-3 lg:gap-6">
               {OLIMPIADAS.map(o => <button key={o.key} onClick={() => setActive(o.key)} className={`rounded-2xl lg:rounded-3xl p-3 lg:p-8 flex flex-col items-start justify-between text-left transition-colors ${active === o.key ? 'bg-primary text-primary-foreground' : 'bg-secondary/50 text-foreground hover:bg-secondary'}`}>
                                 <o.icon className="h-5 w-5 lg:h-10 lg:w-10 text-accent" strokeWidth={1.8} />
                                 <div className="mt-1.5 lg:mt-5">
