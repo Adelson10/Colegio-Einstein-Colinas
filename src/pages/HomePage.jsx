@@ -836,9 +836,9 @@ Parabenizo a direção, os professores e todos os profissionais envolvidos por c
     img: IMG.alunos[1]
   },
   {
-    text: 'Estudar no Colégio Albert Einstein me preparou não só para as provas, mas para a vida. Levo os valores que aprendi aqui para todo lugar.',
+    text: 'Estudar no Colégio Albert Einstein não apenas contribuiu significativamente para meu desempenho acadêmico e para minha entrada no ensino superior, como também me proporcionou amizades que levarei para a vida. Sou muito grato a toda a equipe por fazer parte dessa trajetória.',
     name: 'Ex-aluno do Ensino Médio',
-    img: IMG.alunos[0]
+    img: '/depoimentos/ex-aluno.jpeg'
   }
 ];
 function Testimonials() {
