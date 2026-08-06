@@ -822,7 +822,11 @@ function Estrutura() {
 
 const TESTIMONIALS = [
   {
-    text: 'Meu filho encontrou no Colégio Albert Einstein um ambiente acolhedor e exigente ao mesmo tempo. Em poucos meses, vimos evolução real no desempenho e na confiança dele.',
+    text: `Ao longo do tempo, tenho percebido evolução na forma como a escola acolhe, acompanha e valoriza cada estudante, respeitando suas necessidades e potencialidades. Esse compromisso com uma educação inclusiva faz toda a diferença para as famílias.
+
+Como mãe, é gratificante ver a evolução do meu filho. Seu desenvolvimento, tanto na aprendizagem quanto na convivência, reflete o cuidado, a dedicação e o profissionalismo de toda a equipe escolar.
+
+Parabenizo a direção, os professores e todos os profissionais envolvidos por construírem um ambiente acolhedor, respeitoso e comprometido com o desenvolvimento de cada estudante. Que esse trabalho continue inspirando e transformando vidas.`,
     name: 'Mãe de aluno do Fundamental II',
     img: IMG.alunos[0]
   },
