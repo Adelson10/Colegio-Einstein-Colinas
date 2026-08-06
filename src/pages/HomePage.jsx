@@ -36,8 +36,8 @@ const IMG = {
   entrada: '/Entrada.png',
   parque: '/parque.png',
   alunos: [
-    '/alunos/IMG_8975.jpeg',
-    '/alunos/IMG_8972.jpeg',
+    '/alunos/IMG_8975.png',
+    '/alunos/IMG_8976.png',
   ],
   conquistas: Array.from({ length: 19 }, (_, i) => `/conquistas/imagem${i}.jpg`),
   etapas: {
@@ -834,7 +834,7 @@ const TESTIMONIALS = [
   {
     text: 'Estudar no Colégio Albert Einstein me preparou não só para as provas, mas para a vida. Levo os valores que aprendi aqui para todo lugar.',
     name: 'Ex-aluno do Ensino Médio',
-    img: IMG.alunos[2]
+    img: IMG.alunos[0]
   }
 ];
 function Testimonials() {
@@ -1117,7 +1117,7 @@ function Footer() {
                 </div>
                 <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-primary-foreground/60 sm:pr-20">
                     <p>© {new Date().getFullYear()} Colégio Albert Einstein. Todos os direitos reservados.</p>
-                    <p>Parceria pedagógica UNOPAR desde 2004.</p>
+                    <p>Parceria com o Sistema Anglo de Ensino desde 1996.</p>
                 </div>
             </div>
             <img src="/leaoazul.png" alt="" aria-hidden="true" className="pointer-events-none select-none absolute right-0 top-0 h-full w-auto object-contain opacity-[0.35] mix-blend-multiply translate-x-1/4 scale-125" />
