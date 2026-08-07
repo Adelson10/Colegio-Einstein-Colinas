@@ -38,6 +38,7 @@ const IMG = {
   lab: '/laboratorio.png',
   auditorium: '/auditorio.png',
   lion: '/Lion.png',
+  seguranca: '/catraca-cutout.png',
   entrada: '/Entrada.png',
   parque: '/parque.png',
   alunos: [
@@ -1075,18 +1076,32 @@ function CTAFinal() {
             <div className="mx-auto max-w-[90rem] px-5 lg:px-10 grid lg:grid-cols-2 gap-14 items-center">
                 <Reveal>
                     <h2 className="font-display font-900 text-3xl md:text-4xl lg:text-5xl text-primary leading-tight">
-                        Venha construir o futuro dos seus filhos com a gente.
+                        Venha construir o futuro dos seus filhos com segurança e excelência.
                     </h2>
                     <p className="mt-5 text-muted-foreground leading-relaxed max-w-md">
-                        Agende uma visita, conheça nossa estrutura e converse com nossa equipe sobre a proposta
-                        pedagógica do Colégio Albert Einstein.
+                        No Colégio Albert Einstein, a tecnologia trabalha a favor da proteção e do desenvolvimento
+                        dos nossos alunos. Contamos com controle de acesso, monitoramento e uma estrutura preparada
+                        para oferecer um ambiente seguro, acolhedor e ideal para aprender.
+                    </p>
+                    <p className="mt-4 text-muted-foreground leading-relaxed max-w-md">
+                        Agende uma visita, conheça nossa estrutura e descubra como unimos segurança, inovação e uma
+                        educação de alta qualidade.
                     </p>
                     <div className="mt-8">
                         <PillButton href={WHATSAPP_URL} variant="solid">Fale pelo WhatsApp</PillButton>
                     </div>
                 </Reveal>
-                <Reveal delay={0.1}>
-                    <ImageCarousel images={IMG.classroom} alt="Alunos do Colégio Albert Einstein" className="rounded-3xl aspect-[4/3] w-full" />
+                <Reveal delay={0.1} className="relative">
+                    <div className="relative rounded-3xl aspect-[4/3] w-full overflow-hidden">
+                        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 h-[88%] w-[72%] bg-primary rounded-t-[999px] rounded-b-[2rem]" />
+                        <img
+                          src={IMG.seguranca}
+                          alt="Aluno utilizando controle de acesso por catraca no Colégio Albert Einstein"
+                          loading="lazy"
+                          decoding="async"
+                          className="absolute bottom-0 left-1/2 -translate-x-1/2 z-10 h-[108%] w-auto max-w-none object-contain"
+                        />
+                    </div>
                 </Reveal>
             </div>
         </section>;
