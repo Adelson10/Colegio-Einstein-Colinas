@@ -28,11 +28,17 @@ const IMG = {
   // NOVOS: coloque aqui os caminhos das fotos reais de cada espaço
   parques: [
     '/parquinho.png',
-    '/patio.png'
+    '/patio.png',
+    '/areia.png',
+    '/pebolim.png',
+    '/quadra.png',
+    '/piscina.jpeg'
+
   ],
   lab: '/laboratorio.png',
   auditorium: '/auditorio.png',
   lion: '/Lion.png',
+  seguranca: '/catraca-cutout.png',
   entrada: '/Entrada.png',
   parque: '/parque.png',
   alunos: [
@@ -1067,21 +1073,42 @@ function Medalhas() {
 }
 function CTAFinal() {
   return <section className="py-20 lg:py-28 bg-background">
-            <div className="mx-auto max-w-[90rem] px-5 lg:px-10 grid lg:grid-cols-2 gap-14 items-center">
-                <Reveal>
-                    <h2 className="font-display font-900 text-3xl md:text-4xl lg:text-5xl text-primary leading-tight">
-                        Venha construir o futuro dos seus filhos com a gente.
-                    </h2>
-                    <p className="mt-5 text-muted-foreground leading-relaxed max-w-md">
-                        Agende uma visita, conheça nossa estrutura e converse com nossa equipe sobre a proposta
-                        pedagógica do Colégio Albert Einstein.
-                    </p>
-                    <div className="mt-8">
-                        <PillButton href={WHATSAPP_URL} variant="solid">Fale pelo WhatsApp</PillButton>
+            <div className="mx-auto max-w-[90rem] px-5 lg:px-10">
+                <Reveal className="relative">
+                    <div className="absolute inset-0 rounded-[2.5rem] lg:rounded-[3rem] bg-primary overflow-hidden">
+                        <div className="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-accent/10 blur-3xl" />
+                        <div className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-accent/10 blur-3xl" />
                     </div>
-                </Reveal>
-                <Reveal delay={0.1}>
-                    <ImageCarousel images={IMG.classroom} alt="Alunos do Colégio Albert Einstein" className="rounded-3xl aspect-[4/3] w-full" />
+                    <Sparkles className="pointer-events-none absolute z-10 top-10 left-[48%] hidden sm:block h-10 w-10 text-accent -rotate-12" strokeWidth={1.5}/>
+                    <Star className="pointer-events-none absolute z-10 bottom-16 right-[6%] hidden lg:block h-11 w-11 text-accent rotate-12" strokeWidth={1.5} />
+                    <div className="relative grid lg:grid-cols-2 gap-6 lg:gap-10 px-6 sm:px-10 lg:pl-16 lg:pr-10">
+                        <div className="order-1 lg:order-2 self-end flex justify-center lg:justify-center">
+                            <img
+                              src={IMG.seguranca}
+                              alt="Aluno utilizando controle de acesso por catraca no Colégio Albert Einstein"
+                              loading="lazy"
+                              decoding="async"
+                              className="relative z-10 -mt-6 lg:-mt-[10rem] h-[20rem] sm:h-[24rem] lg:h-[42rem] w-auto max-w-none object-contain"
+                            />
+                        </div>
+                        <div className="order-2 lg:order-1 self-center text-center lg:text-left py-12 lg:py-16">
+                            <h2 className="font-display font-900 text-3xl md:text-4xl lg:text-5xl text-primary-foreground leading-tight">
+                                Venha construir o futuro dos seus filhos com segurança e excelência.
+                            </h2>
+                            <p className="mt-5 text-primary-foreground/80 leading-relaxed mx-auto lg:mx-0 text-balance">
+                                No Colégio Albert Einstein, a tecnologia trabalha a favor da proteção e do desenvolvimento
+                                dos nossos alunos. Contamos com controle de acesso, monitoramento e uma estrutura preparada
+                                para oferecer um ambiente seguro, acolhedor e ideal para aprender.
+                            </p>
+                            <p className="mt-4 text-primary-foreground/80 leading-relaxed mx-auto lg:mx-0 text-balance">
+                                Agende uma visita, conheça nossa estrutura e descubra como unimos segurança, inovação e uma
+                                educação de alta qualidade.
+                            </p>
+                            <div className="mt-8 flex justify-center lg:justify-start">
+                                <PillButton href={WHATSAPP_URL} variant="invert">Fale pelo WhatsApp</PillButton>
+                            </div>
+                        </div>
+                    </div>
                 </Reveal>
             </div>
         </section>;
