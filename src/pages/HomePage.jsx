@@ -831,14 +831,36 @@ Parabenizo a direção, os professores e todos os profissionais envolvidos por c
     img: IMG.alunos[0]
   },
   {
-    text: 'A dedicação dos professores faz toda a diferença. Minha filha se sente acolhida e motivada a aprender todos os dias.',
-    name: 'Mãe de aluna da Educação Infantil',
-    img: IMG.alunos[1]
+    text: 'Meus filhos estudam no Colégio Albert Einstein desde o início da vida escolar, e somos muito gratos por tudo o que vivemos nesses anos. Além da excelente qualidade de ensino, sempre encontramos uma equipe acolhedora, com coordenação e direção acessíveis e dispostas a caminhar junto com as famílias. É uma alegria vê-los crescer em um ambiente onde são respeitados, incentivados e verdadeiramente acolhidos.',
+    name: 'Mãe de aluno do Fundamental I',
+    img: '/depoimentos/mae-aluno.jpeg'
   },
+
+ {
+    text: 'Ver o Mateus crescendo e feliz aqui no colégio não tem preço! Eu já conhecia a qualidade do Material Anglo da minha época de escola, mas ver o cuidado dos professores e o quanto ele se desenvolve nos dá a certeza de que fizemos a escolha certa. Gratidão a essa equipe incrível!',
+    name: 'Pai de aluno do Fundamental I',
+    img: '/depoimentos/pai-aluno.jpeg'
+  },
+  {
+    text: 'Tenho a satisfação de falar que pertenci à família Einstein. Conjuntamente com os meus pais, o colégio foi o local a qual aprendi os valores dos aprendizados técnico e humano, essenciais tanto para o meu desempenho acadêmico no ensino superior quanto para a vida.',
+    name: 'Ex-aluno do Ensino Médio',
+    img: '/depoimentos/ex-aluno3.jpeg'
+  },
+
   {
     text: 'Estudar no Colégio Albert Einstein não apenas contribuiu significativamente para meu desempenho acadêmico e para minha entrada no ensino superior, como também me proporcionou amizades que levarei para a vida. Sou muito grato a toda a equipe por fazer parte dessa trajetória.',
     name: 'Ex-aluno do Ensino Médio',
     img: '/depoimentos/ex-aluno.jpeg'
+  },
+  {
+    text: 'Mais do que um colégio, o Albert Einstein foi um lugar onde aprendi, cresci e me preparei para os desafios da vida. Sou grato por tudo o que vivi aqui, pelas amizades que construí e por cada aprendizado que levarei comigo sempre. Sem dúvida, é uma parte da minha trajetória que sempre vou guardar com carinho.',
+    name: 'Ex-aluno do Ensino Médio',
+    img: '/depoimentos/ex-aluno2.jpeg'
+  },
+  {
+    text: 'Sou muito grato por ter encontrado no Colégio Einstein tanto uma ótima equipe de profissionais dispostos a me auxiliarem quanto um sistema de ensino eficiente. As habilidades que foram desenvolvidas continuam a repercutir na minha jornada acadêmica e me sinto mais preparado para a vida profissional.',
+    name: 'Ex-aluno do Ensino Médio',
+    img: '/depoimentos/ex-aluno4.jpeg'
   }
 ];
 function Testimonials() {
@@ -887,7 +909,7 @@ function Testimonials() {
                         {TESTIMONIALS.map((t, i) => {
                           const isActive = i === active;
                           const deckStyles = ['-rotate-6 -translate-x-4 -translate-y-2', 'rotate-12 translate-x-5 translate-y-3', '-rotate-3 translate-x-1 -translate-y-4'];
-                          return <button key={t.name} onClick={() => setActive(i)} aria-label={t.name} style={{ zIndex: isActive ? 10 : i }} className={`absolute inset-0 overflow-hidden rounded-3xl shadow-xl transition-all duration-500 ${isActive ? 'rotate-0 translate-x-0 translate-y-0 scale-100 opacity-100' : `scale-90 opacity-80 hover:opacity-100 ${deckStyles[i % deckStyles.length]}`}`}>
+                          return <button key={t.img} onClick={() => setActive(i)} aria-label={t.name} style={{ zIndex: isActive ? 10 : i }} className={`absolute inset-0 overflow-hidden rounded-3xl shadow-xl transition-all duration-500 ${isActive ? 'rotate-0 translate-x-0 translate-y-0 scale-100 opacity-100' : `scale-90 opacity-80 hover:opacity-100 ${deckStyles[i % deckStyles.length]}`}`}>
                                 <img src={t.img} alt={t.name} loading="lazy" decoding="async" className="h-full w-full object-cover" />
                             </button>;
                         })}
