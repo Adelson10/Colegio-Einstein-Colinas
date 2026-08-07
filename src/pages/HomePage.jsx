@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { GraduationCap, Award, Trophy, Users, BookOpen, Star, Menu, X, MapPin, Phone, Mail, Clock, CheckCircle2, Medal, Building2, Sparkles, Target, Eye, HeartHandshake, ArrowUpRight, ArrowUp, ArrowDown, Quote, Landmark, Sigma, Bot, ChevronLeft, ChevronRight } from 'lucide-react';
+import { GraduationCap, Award, Trophy, Users, BookOpen, Star, Menu, X, MapPin, Phone, Mail, Clock, CheckCircle2, Medal, Building2, Sparkles, Target, Eye, HeartHandshake, ArrowUpRight, ArrowUp, ArrowDown, Quote, Landmark, Sigma, Bot, ChevronLeft, ChevronRight, ShieldCheck, TrendingUp, Plus, LockOpen } from 'lucide-react';
 import LogoIcon from '../../public/logo.jsx';
 const LOGO = '/logo.png';
 const IMG = {
@@ -1074,38 +1074,72 @@ function Medalhas() {
 function CTAFinal() {
   return <section className="py-20 lg:py-28 bg-background">
             <div className="mx-auto max-w-[90rem] px-5 lg:px-10">
-                <Reveal className="relative">
-                    <div className="absolute inset-0 rounded-[2.5rem] lg:rounded-[3rem] bg-primary overflow-hidden">
-                        <div className="pointer-events-none absolute -top-24 -right-24 h-72 w-72 rounded-full bg-accent/10 blur-3xl" />
-                        <div className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-accent/10 blur-3xl" />
-                    </div>
-                    <Sparkles className="pointer-events-none absolute z-10 top-10 left-[48%] hidden sm:block h-10 w-10 text-accent -rotate-12" strokeWidth={1.5}/>
-                    <Star className="pointer-events-none absolute z-10 bottom-16 right-[6%] hidden lg:block h-11 w-11 text-accent rotate-12" strokeWidth={1.5} />
-                    <div className="relative grid lg:grid-cols-2 gap-6 lg:gap-10 px-6 sm:px-10 lg:pl-16 lg:pr-10">
-                        <div className="order-1 lg:order-2 self-end flex justify-center lg:justify-center">
-                            <img
-                              src={IMG.seguranca}
-                              alt="Aluno utilizando controle de acesso por catraca no Colégio Albert Einstein"
-                              loading="lazy"
-                              decoding="async"
-                              className="relative z-10 -mt-6 lg:-mt-[10rem] h-[20rem] sm:h-[24rem] lg:h-[42rem] w-auto max-w-none object-contain"
-                            />
+                <Reveal className="relative grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+                    <div className="order-2 lg:order-1 text-center lg:text-left">
+                        <h2 className="font-display font-900 text-3xl md:text-4xl lg:text-5xl text-primary leading-tight">
+                            Venha construir o futuro dos seus filhos com segurança e excelência.
+                        </h2>
+                        <p className="mt-5 text-muted-foreground leading-relaxed mx-auto lg:mx-0 text-balance">
+                            No Colégio Albert Einstein, a tecnologia trabalha a favor da proteção e do desenvolvimento
+                            dos nossos alunos. Contamos com controle de acesso, monitoramento e uma estrutura preparada
+                            para oferecer um ambiente seguro, acolhedor e ideal para aprender.
+                        </p>
+                        <p className="mt-4 text-muted-foreground leading-relaxed mx-auto lg:mx-0 text-balance">
+                            Agende uma visita, conheça nossa estrutura e descubra como unimos segurança, inovação e uma
+                            educação de alta qualidade.
+                        </p>
+                        <div className="mt-8 flex justify-center lg:justify-start">
+                            <PillButton href={WHATSAPP_URL} variant="solid">Fale pelo WhatsApp</PillButton>
                         </div>
-                        <div className="order-2 lg:order-1 self-center text-center lg:text-left py-12 lg:py-16">
-                            <h2 className="font-display font-900 text-3xl md:text-4xl lg:text-5xl text-primary-foreground leading-tight">
-                                Venha construir o futuro dos seus filhos com segurança e excelência.
-                            </h2>
-                            <p className="mt-5 text-primary-foreground/80 leading-relaxed mx-auto lg:mx-0 text-balance">
-                                No Colégio Albert Einstein, a tecnologia trabalha a favor da proteção e do desenvolvimento
-                                dos nossos alunos. Contamos com controle de acesso, monitoramento e uma estrutura preparada
-                                para oferecer um ambiente seguro, acolhedor e ideal para aprender.
-                            </p>
-                            <p className="mt-4 text-primary-foreground/80 leading-relaxed mx-auto lg:mx-0 text-balance">
-                                Agende uma visita, conheça nossa estrutura e descubra como unimos segurança, inovação e uma
-                                educação de alta qualidade.
-                            </p>
-                            <div className="mt-8 flex justify-center lg:justify-start">
-                                <PillButton href={WHATSAPP_URL} variant="invert">Fale pelo WhatsApp</PillButton>
+                    </div>
+                    <div className="order-1 lg:order-2 relative mx-auto lg:mx-0 lg:ml-auto w-[19rem] sm:w-[23rem] lg:w-[27rem] aspect-[4/5]">
+                        <div
+                          className="pointer-events-none absolute -top-3 -right-3 sm:right-0 grid grid-cols-5 gap-1.5 sm:gap-2 text-accent/50"
+                          aria-hidden="true"
+                        >
+                            {Array.from({ length: 15 }).map((_, i) => <Plus key={i} className="h-2.5 w-2.5 sm:h-3 sm:w-3" strokeWidth={3} />)}
+                        </div>
+                        <div
+                          className="absolute inset-x-6 top-[12rem] bottom-0 rounded-t-[5rem] sm:rounded-t-[4rem] bg-primary"
+                          aria-hidden="true"
+                        />
+                        <img
+                          src={IMG.seguranca}
+                          alt="Aluno utilizando controle de acesso por catraca no Colégio Albert Einstein"
+                          loading="lazy"
+                          decoding="async"
+                          className="absolute inset-x-0 bottom-0 z-10 mx-auto h-[110%] w-auto max-w-none object-contain object-bottom"
+                        />
+                        <div className="absolute z-20 top-4 -left-2 sm:-left-6 w-36 rounded-2xl bg-white p-3">
+                            <span className="text-[12px] font-700 text-primary leading-tight">Controle de Acesso</span>
+                            <div className="mt-2 flex items-center gap-1 rounded-full bg-emerald-100 p-1 w-fit pr-2">
+                                <div className="p-1 bg-emerald-300 rounded-full">
+                                  <ArrowUp className="h-4 w-4 text-emerald-600" strokeWidth={2.5} />
+                                </div>
+                                <span className="text-[11px] font-700 text-emerald-600">+100% Seguro</span>
+                            </div>
+                        </div>
+                        <div className="absolute z-20 bottom-16 sm:bottom-20 -left-3 sm:-left-8 flex items-center gap-2 rounded-2xl bg-white p-3">
+                            <span className="grid shrink-0 place-items-center rounded-xl bg-emerald-300 text-accent p-2">
+                                <LockOpen className="h-4 w-4 text-emerald-600" strokeWidth={2.5} />
+                            </span>
+                            <div className="space-y-1">
+                                <div className="text-[12px] font-700 text-primary leading-tight">Catraca Ativa</div>
+                                <div className="text-[11px] font-600 text-emerald-600 leading-tight">● Liberado</div>
+                            </div>
+                        </div>
+                        <div className="absolute z-20 bottom-4 right-0 sm:-right-6 flex items-center gap-2.5 rounded-2xl bg-white p-3 w-40">
+                            <span className="relative grid h-12 w-9 shrink-0 place-items-center overflow-hidden rounded-xl bg-primary/20 text-primary">
+                                <Users className="h-5 w-5" strokeWidth={2.5} />
+                                <span
+                                  className="icon-shimmer pointer-events-none absolute inset-0"
+                                  aria-hidden="true"
+                                />
+                            </span>
+                            <div className="flex-1">
+                                <div className="text-[12px] font-700 text-primary leading-tight">Alunos Monitorados</div>
+                                <div className="mt-1.5 h-1.5 w-full rounded-full bg-secondary" />
+                                <div className="mt-1 h-1.5 w-2/3 rounded-full bg-secondary" />
                             </div>
                         </div>
                     </div>
