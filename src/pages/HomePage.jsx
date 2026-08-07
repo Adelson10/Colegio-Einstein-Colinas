@@ -22,7 +22,8 @@ const IMG = {
     '/projetos/robotica1.png',
     '/projetos/robotica2.png',
     '/projetos/robotica3.png',
-    '/projetos/robotica4.png'
+    '/projetos/robotica4.png',
+    'projetos/robotica5.png'
   ],
   library: 'biblioteca.png',
   // NOVOS: coloque aqui os caminhos das fotos reais de cada espaço
@@ -370,7 +371,7 @@ function Hero() {
                   ))}
                 </div>
                 <div className="flex w-fit flex-col text-left">
-                  <div className="font-display w-fit font-900 text-4xl text-primary leading-none">600+</div>
+                  <div className="font-display w-fit font-900 text-4xl text-primary leading-none">350+</div>
                   <div className="text-[14px]/3 w-fit whitespace-nowrap text-muted-foreground mt-1 ">Alunos em</div>
                   <div className="text-[14px]/3 w-fit whitespace-nowrap text-muted-foreground mt-1 ">nossa comunidade</div>
                 </div>
@@ -827,18 +828,11 @@ function Estrutura() {
 }
 
 const TESTIMONIALS = [
-  {
-    text: `Ao longo do tempo, tenho percebido evolução na forma como a escola acolhe, acompanha e valoriza cada estudante, respeitando suas necessidades e potencialidades. Esse compromisso com uma educação inclusiva faz toda a diferença para as famílias.
 
-Como mãe, é gratificante ver a evolução do meu filho. Seu desenvolvimento, tanto na aprendizagem quanto na convivência, reflete o cuidado, a dedicação e o profissionalismo de toda a equipe escolar.
-
-Parabenizo a direção, os professores e todos os profissionais envolvidos por construírem um ambiente acolhedor, respeitoso e comprometido com o desenvolvimento de cada estudante. Que esse trabalho continue inspirando e transformando vidas.`,
-    name: 'Mãe de aluno do Fundamental II',
-    img: IMG.alunos[0]
-  },
   {
     text: 'Meus filhos estudam no Colégio Albert Einstein desde o início da vida escolar, e somos muito gratos por tudo o que vivemos nesses anos. Além da excelente qualidade de ensino, sempre encontramos uma equipe acolhedora, com coordenação e direção acessíveis e dispostas a caminhar junto com as famílias. É uma alegria vê-los crescer em um ambiente onde são respeitados, incentivados e verdadeiramente acolhidos.',
-    name: 'Mãe de aluno do Fundamental I',
+    
+    name: 'Maraysa Chagas — Mãe de aluno do Fundamental I',
     img: '/depoimentos/mae-aluno.jpeg'
   },
 
@@ -849,25 +843,35 @@ Parabenizo a direção, os professores e todos os profissionais envolvidos por c
   },
   {
     text: 'Tenho a satisfação de falar que pertenci à família Einstein. Conjuntamente com os meus pais, o colégio foi o local a qual aprendi os valores dos aprendizados técnico e humano, essenciais tanto para o meu desempenho acadêmico no ensino superior quanto para a vida.',
-    name: 'Ex-aluno do Ensino Médio',
+    name: 'Ruan Aires - Ex-aluno do Ensino Médio',
     img: '/depoimentos/ex-aluno3.jpeg'
   },
 
   {
     text: 'Estudar no Colégio Albert Einstein não apenas contribuiu significativamente para meu desempenho acadêmico e para minha entrada no ensino superior, como também me proporcionou amizades que levarei para a vida. Sou muito grato a toda a equipe por fazer parte dessa trajetória.',
-    name: 'Ex-aluno do Ensino Médio',
+    name: 'Nicolas - Ex-aluno do Ensino Médio',
     img: '/depoimentos/ex-aluno.jpeg'
   },
   {
     text: 'Mais do que um colégio, o Albert Einstein foi um lugar onde aprendi, cresci e me preparei para os desafios da vida. Sou grato por tudo o que vivi aqui, pelas amizades que construí e por cada aprendizado que levarei comigo sempre. Sem dúvida, é uma parte da minha trajetória que sempre vou guardar com carinho.',
-    name: 'Ex-aluno do Ensino Médio',
+    name: 'João Ronaldo Tomé - Ex-aluno do Ensino Médio',
     img: '/depoimentos/ex-aluno2.jpeg'
   },
   {
     text: 'Sou muito grato por ter encontrado no Colégio Einstein tanto uma ótima equipe de profissionais dispostos a me auxiliarem quanto um sistema de ensino eficiente. As habilidades que foram desenvolvidas continuam a repercutir na minha jornada acadêmica e me sinto mais preparado para a vida profissional.',
-    name: 'Ex-aluno do Ensino Médio',
+    name: 'Marcos Leite - Ex-aluno do Ensino Médio',
     img: '/depoimentos/ex-aluno4.jpeg'
-  }
+  },
+
+    {
+    text: `Ao longo do tempo, tenho percebido evolução na forma como a escola acolhe, acompanha e valoriza cada estudante, respeitando suas necessidades e potencialidades. Esse compromisso com uma educação inclusiva faz toda a diferença para as famílias.
+
+Como mãe, é gratificante ver a evolução do meu filho. Seu desenvolvimento, tanto na aprendizagem quanto na convivência, reflete o cuidado, a dedicação e o profissionalismo de toda a equipe escolar.
+
+Parabenizo a direção, os professores e todos os profissionais envolvidos por construírem um ambiente acolhedor, respeitoso e comprometido com o desenvolvimento de cada estudante. Que esse trabalho continue inspirando e transformando vidas.`,
+    name: 'Mãe de aluno do Fundamental II',
+    img: IMG.alunos[0]
+  },
 ];
 function Testimonials() {
   const [active, setActive] = useState(0);
