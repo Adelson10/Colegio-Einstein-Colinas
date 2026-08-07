@@ -28,7 +28,12 @@ const IMG = {
   // NOVOS: coloque aqui os caminhos das fotos reais de cada espaço
   parques: [
     '/parquinho.png',
-    '/patio.png'
+    '/patio.png',
+    '/areia.png',
+    '/pebolim.png',
+    '/quadra.png',
+    '/piscina.jpeg'
+
   ],
   lab: '/laboratorio.png',
   auditorium: '/auditorio.png',
