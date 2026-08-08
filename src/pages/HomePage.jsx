@@ -23,7 +23,8 @@ const IMG = {
     '/projetos/robotica2.png',
     '/projetos/robotica3.png',
     '/projetos/robotica4.png',
-    'projetos/robotica5.png'
+    '/projetos/robotica5.png',
+    '/projetos/robotica6.png'
   ],
   library: 'biblioteca.png',
   // NOVOS: coloque aqui os caminhos das fotos reais de cada espaço
