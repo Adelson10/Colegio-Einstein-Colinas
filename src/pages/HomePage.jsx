@@ -146,7 +146,7 @@ function Reveal({
 }
 
 // ---------------------------------------------------------------------
-// Botão em pill com selo circular de seta — vocabulário visual repetido
+// Botão em pill com selo circular de seta vocabulário visual repetido
 // em todo o site (CTAs, formulário, navegação).
 // ---------------------------------------------------------------------
 function PillButton({
@@ -833,7 +833,7 @@ const TESTIMONIALS = [
   {
     text: 'Meus filhos estudam no Colégio Albert Einstein desde o início da vida escolar, e somos muito gratos por tudo o que vivemos nesses anos. Além da excelente qualidade de ensino, sempre encontramos uma equipe acolhedora, com coordenação e direção acessíveis e dispostas a caminhar junto com as famílias. É uma alegria vê-los crescer em um ambiente onde são respeitados, incentivados e verdadeiramente acolhidos.',
     
-    name: 'Maraysa Chagas — Mãe de aluno do Fundamental I',
+    name: 'Maraysa Chagas, Mãe de aluno do Fundamental I',
     img: '/depoimentos/mae-aluno.jpeg'
   },
 
